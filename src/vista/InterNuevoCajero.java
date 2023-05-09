@@ -4,6 +4,7 @@
  */
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import com.mysql.fabric.xmlrpc.base.Data;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
@@ -23,8 +24,8 @@ import modelo.Persona;
  *
  * @author netom
  */
-public class InterNuevoCajero extends javax.swing.JInternalFrame  {
-    
+public class InterNuevoCajero extends javax.swing.JInternalFrame {
+
     /**
      * Creates new form CrearAdmin
      */
@@ -33,9 +34,17 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
     public InterNuevoCajero() {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();
-       // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
+        // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
         Cajero = new Cajero();
-       
+        FormaterJtextField.limitarLongitudCampo(this.txt_Curp, 18);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Calle, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_CP, 5);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Nombre, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_localidad, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_num, 10);
+
     }
 
     /**
@@ -58,7 +67,6 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         jLabel6 = new javax.swing.JLabel();
         txt_Curp = new javax.swing.JTextField();
         txt_Nombre = new javax.swing.JTextField();
-        txt_cedula = new javax.swing.JTextField();
         txt_localidad = new javax.swing.JTextField();
         txt_CP = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -75,7 +83,7 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         jLabel10 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,8 +133,6 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         txt_Curp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txt_Nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        txt_cedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txt_localidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -188,35 +194,31 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGap(40, 40, 40)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_localidad, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                        .addComponent(txt_CP)))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_localidad, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(txt_CP)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txt_Calle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel10)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txt_num, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txt_Calle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txt_num, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -237,8 +239,7 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
                             .addComponent(txt_apellido1)
                             .addComponent(txt_apellido2)
                             .addComponent(Jdate_Nacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,29 +278,24 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Jdate_Nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel)
+                    .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txt_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel)
-                            .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(txt_CP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel6)
+                    .addComponent(txt_CP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -314,7 +310,7 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,11 +323,11 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -343,16 +339,21 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-        if(campoVacio()){
-            JOptionPane.showMessageDialog(this, "Completa todos los campos");
-        }else{
-            recuperarDatos();
-            if(Ctrl_Cajero.Crear(Cajero)){
-                JOptionPane.showMessageDialog(this, "Registro completado");
-                JOptionPane.showMessageDialog(this, Cajero.getClave(),"Clave de acceso",1);
+        if (campoVacio()) {
 
-            }else{
-                JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+        } else {
+            if (Ctrl_Persona.validarCurp(txt_Curp.getText())) {
+                recuperarDatos();
+                if (Ctrl_Cajero.crear(Cajero)) {
+                    JOptionPane.showMessageDialog(this, "Registro completado");
+                    JOptionPane.showMessageDialog(this, Cajero.getClave(), "Clave de acceso", 1);
+                    Cajero = new Cajero();
+                    ColocarInfo(Cajero);
+                } else {
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Formato de CURP no valido");
             }
         }
     }//GEN-LAST:event_jButton_GuardarActionPerformed
@@ -366,46 +367,66 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_cBox_estadoActionPerformed
 
+    boolean campoVacio() {
+        int i = 0;
 
+        if (txt_Nombre.getText().isEmpty()) {
+            i++;
+        }
+        if (Jdate_Nacimiento.getDate() == null) {
+            i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
+        }
+        if (txt_apellido1.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_apellido2.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_Curp.getText().isEmpty()) {
+            i++;
+        }
 
-    boolean campoVacio(){                  
-                int i=0;                        
-
-        if(txt_Nombre.getText().isEmpty()){
+        if (txt_CP.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido1.getText().isEmpty()){
+        if (txt_localidad.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido2.getText().isEmpty()){
+        if (txt_Calle.getText().isEmpty()) {
             i++;
         }
-        if(txt_Curp.getText().isEmpty()){
+        if (txt_num.getText().isEmpty()) {
             i++;
         }
-
-        if(txt_CP.getText().isEmpty()){
-            i++;
+        if (i == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
+            return true;
         }
-        if(txt_localidad.getText().isEmpty()){
-            i++;
-        }
-        if(txt_Calle.getText().isEmpty()){
-            i++;
-        }
-        if(txt_num.getText().isEmpty()){
-            i++;
-        }
-      if(i==0){
-          return false;
-      }else{
-          return true;
-      }
     }
+  void ColocarInfo(Cajero cajero) {
 
+        txt_Nombre.setText("");
+        txt_apellido1.setText("");
+        txt_apellido2.setText("");
+        txt_Curp.setText("");
+        txt_CP.setText("");
+        txt_localidad.setText("");
+        txt_Calle.setText("");
+        txt_num.setText("");
+        cBox_estado.setSelectedIndex(0);
+        Jdate_Nacimiento.setDate(new Date());
+    }
     void recuperarDatos() {
+        Cajero = new Cajero();
         Persona p = new Persona();
-        Direccion d=new Direccion();
+        Direccion d = new Direccion();
         p.setNombre(txt_Nombre.getText());
         p.setApellidoP(txt_apellido1.getText());
         p.setApellidoM(txt_apellido2.getText());
@@ -415,16 +436,16 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
         date.setTime(System.currentTimeMillis());
         System.out.println(date.toString());
         p.setFechaRegistro(date);
-        d.setEstado(cBox_estado.getSelectedIndex()+1733);
-        System.out.println("Combos "+cBox_estado.getSelectedIndex());
-         System.out.println("Combos "+cBox_estado.getSelectedItem());
-       d.setCP(txt_CP.getText());
-       d.setLocalidad(txt_localidad.getText());
-       d.setCalle(txt_Calle.getText());
-       d.setNumero(txt_num.getText());
+        d.setEstado(cBox_estado.getSelectedIndex() + 1733);
+        System.out.println("Combos " + cBox_estado.getSelectedIndex());
+        System.out.println("Combos " + cBox_estado.getSelectedItem());
+        d.setCP(txt_CP.getText());
+        d.setLocalidad(txt_localidad.getText());
+        d.setCalle(txt_Calle.getText());
+        d.setNumero(txt_num.getText());
         p.setDireccion(d);
-       Cajero.setPersona(p);
-       
+        Cajero.setPersona(p);
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;
@@ -451,7 +472,6 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame  {
     private javax.swing.JTextField txt_Nombre;
     private javax.swing.JTextField txt_apellido1;
     private javax.swing.JTextField txt_apellido2;
-    private javax.swing.JTextField txt_cedula;
     private javax.swing.JTextField txt_localidad;
     private javax.swing.JTextField txt_num;
     // End of variables declaration//GEN-END:variables

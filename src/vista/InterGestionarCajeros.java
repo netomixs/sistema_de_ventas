@@ -18,8 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.plaf.DesktopPaneUI;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import modelo.Cajero;
 import modelo.Cliente;
 
@@ -41,7 +43,7 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
         this.setSize(new Dimension(900, 500));
         this.setTitle("Gestionar Cajeros");
         this.repaint();
-        DefaultTableModel datos = Ctrl_Cajero.getTablaCajeros();
+        DefaultTableModel datos = Ctrl_Cajero.getTabla();
         this.jTable_Cajeros.setModel(datos);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -79,7 +81,7 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
     }
 
     void actualizarTabla() {
-        DefaultTableModel datos = Ctrl_Cajero.getTablaCajeros();
+        DefaultTableModel datos = Ctrl_Cajero.getTabla();
         this.jTable_Cajeros.setModel(datos);
     }
 
@@ -92,22 +94,19 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Cajeros = new javax.swing.JTable();
         jButton_actualizar = new javax.swing.JButton();
         jButton_eliminar = new javax.swing.JButton();
-        jLabel_wallpaper = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        label_busqueda = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
-        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrar Cajeros");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -137,24 +136,54 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
 
         jButton_actualizar.setBackground(new java.awt.Color(51, 204, 0));
         jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_actualizar.setText("Actualizar");
+        jButton_actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/id-svgrepo-com.png"))); // NOI18N
+        jButton_actualizar.setText("Datos");
+        jButton_actualizar.setPreferredSize(null);
         jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_actualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, -1, -1));
+        getContentPane().add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 150, -1));
 
         jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
         jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backspace-svgrepo-com.png"))); // NOI18N
         jButton_eliminar.setText("Eliminar");
+        jButton_eliminar.setMinimumSize(new java.awt.Dimension(100, 60));
+        jButton_eliminar.setPreferredSize(null);
         jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 90, -1));
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
+        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, 150, -1));
+
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 5);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel2.setLayout(flowLayout1);
+
+        label_busqueda.setMinimumSize(new java.awt.Dimension(64, 25));
+        label_busqueda.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel2.add(label_busqueda);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SistemaDeventas1/src/img/search-svgrepo-com.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 250, 40));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/refresh-icon (1).png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,8 +200,9 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
                 String clave = jTable_Cajeros.getModel().getValueAt(indexSelecionado, 3).toString();
                 cajero.setClave(clave);
                 System.out.println(clave);
-                cajero = Ctrl_Cajero.getCajer(cajero);
-                Ctrl_Cajero.eliminarPersona(cajero);
+                cajero = Ctrl_Cajero.get(cajero);
+                Ctrl_Cajero.eliminar(cajero);
+                indexSelecionado=-1;
                 actualizarTabla();
 
         } else {
@@ -192,7 +222,7 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
 
         if (indexSelecionado >= 0) {
-            String clave = jTable_Cajeros.getModel().getValueAt(indexSelecionado, 3).toString();
+            String clave = jTable_Cajeros.getValueAt(indexSelecionado, 3).toString();
             InterEditarCajero editCajero = new InterEditarCajero(clave);
             desk.add(editCajero);
             editCajero.setVisible(true);
@@ -209,15 +239,30 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTable_CajerosMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    buscarEnJTable(this.label_busqueda.getText(),jTable_Cajeros);     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        actualizarTabla();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_actualizar;
     private javax.swing.JButton jButton_eliminar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_Cajeros;
+    private javax.swing.JTextField label_busqueda;
     // End of variables declaration//GEN-END:variables
-
+public void buscarEnJTable(String valorBusqueda, JTable tabla) {
+    DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+    TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(modelo);
+    tabla.setRowSorter(rowSorter);
+    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + valorBusqueda));
+}
 }

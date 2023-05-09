@@ -7,6 +7,7 @@ public class ProductosVendidos {
     int Cantidad;
     int Factura;
     float subTotal;
+    float descuento;
 
     public ProductosVendidos(int ID, int Prodcuto, int Cantidad, int Factura, float subTotal) {
         this.ID = ID;
@@ -61,6 +62,14 @@ public class ProductosVendidos {
 
     public void setSubTotal(float subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public float getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
     }
         
 }

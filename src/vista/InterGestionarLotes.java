@@ -1,14 +1,10 @@
 package vista;
 
-import controlador.Ctrl_Cajero;
+import Interfaces.VistaFormInterfaz;
 import controlador.Ctrl_Lote;
-
 import controlador.Ctrl_Producto;
-import controlador.Ctrl_TipoProducto;
 import java.awt.Dimension;
 import java.util.Date;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -20,35 +16,31 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
-import modelo.Categoria;
 import modelo.Lote;
-import modelo.Producto;
-import modelo.TIpo_Producto;
-import static vista.InterGestionarCajeros.jTable_Cajeros;
 
 /**
  *
  * @author ediso
  */
-public class InterGestionarLotes extends javax.swing.JInternalFrame implements VistaFormInterfaz<Lote>{
-    
+public class InterGestionarLotes extends javax.swing.JInternalFrame implements VistaFormInterfaz<Lote> {
+
+    Ctrl_Lote ctrlLote = new Ctrl_Lote();
     private int idProducto;
     int obtenerIdCategoriaCombo = 0;
     Lote lote;
     int indexSeleccioado;
-    
+
     public InterGestionarLotes() {
         initComponents();
-        this.setSize(new Dimension(900, 500));
-        this.setTitle("Gestionar Productos");
-        
+        this.setSize(new Dimension(940, 500));
+        this.setTitle("Gestionar Lotes");
+        cargarTabla();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Lote = new javax.swing.JTable();
@@ -62,15 +54,13 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         jLabel8 = new javax.swing.JLabel();
         jDate_Retiro = new com.toedter.calendar.JDateChooser();
         jDate_Llegada = new com.toedter.calendar.JDateChooser();
-        jLabel_wallpaper = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        label_busqueda = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Administrar Productos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -95,31 +85,41 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout();
+        flowLayout3.setAlignOnBaseline(true);
+        jPanel2.setLayout(flowLayout3);
 
         jButton_actualizar.setBackground(new java.awt.Color(51, 204, 0));
         jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/edit_modify_icon_149489.png"))); // NOI18N
         jButton_actualizar.setText("Actualizar");
+        jButton_actualizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton_actualizar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_actualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 20, 100, 32));
+        jPanel2.add(jButton_actualizar);
 
         jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
         jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/trash_bin_icon-icons.com_67981.png"))); // NOI18N
         jButton_eliminar.setText("Eliminar");
         jButton_eliminar.setEnabled(false);
         jButton_eliminar.setFocusable(false);
+        jButton_eliminar.setMaximumSize(new java.awt.Dimension(142, 54));
+        jButton_eliminar.setMinimumSize(new java.awt.Dimension(142, 54));
+        jButton_eliminar.setPreferredSize(new java.awt.Dimension(142, 54));
+        jButton_eliminar.setRequestFocusEnabled(false);
         jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_eliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 80, 100, 30));
+        jPanel2.add(jButton_eliminar);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 130, 270));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 160, 260));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -149,36 +149,70 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         jPanel3.add(jDate_Llegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 170, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 130));
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
+
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 5);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel4.setLayout(flowLayout1);
+
+        label_busqueda.setMinimumSize(new java.awt.Dimension(64, 25));
+        label_busqueda.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel4.add(label_busqueda);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SistemaDeventas1/src/img/search-svgrepo-com.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1);
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 230, 40));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/refresh-icon (1).png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-        actualizar();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Ctrl_Producto.buscarEnJTable(this.label_busqueda.getText(), jTable_Lote);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    }//GEN-LAST:event_jButton_actualizarActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        actualizarTabla();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-       eliminar();
+        eliminar();
     }//GEN-LAST:event_jButton_eliminarActionPerformed
+
+    private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
+        actualizar();
+    }//GEN-LAST:event_jButton_actualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_actualizar;
     private javax.swing.JButton jButton_eliminar;
     private com.toedter.calendar.JDateChooser jDate_Llegada;
     private com.toedter.calendar.JDateChooser jDate_Retiro;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_Lote;
+    private javax.swing.JTextField label_busqueda;
     private javax.swing.JTextField txt_Serie;
     // End of variables declaration//GEN-END:variables
 
@@ -188,7 +222,8 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
      * *****************************************************
      */
 // Crear un filtro de documento para limitar la cantidad de caracteres
-     public void limitarLongitudCampo(JTextField campo, int maxChars) {
+    @Override
+    public void limitarLongitudCampo(JTextField campo, int maxChars) {
         PlainDocument doc = (PlainDocument) campo.getDocument();
         doc.setDocumentFilter(new DocumentFilter() {
             @Override
@@ -197,7 +232,7 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
                     super.insertString(fb, offs, str, a);
                 }
             }
-            
+
             @Override
             public void replace(DocumentFilter.FilterBypass fb, int offs, int length, String str, AttributeSet a) throws BadLocationException {
                 if ((fb.getDocument().getLength() + str.length() - length) <= maxChars) {
@@ -206,20 +241,25 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
             }
         });
     }
-    
+
+    @Override
     public void cargarTabla() {
-        DefaultTableModel datos = Ctrl_Lote.getTabla();
-        
-        this.jTable_Lote.setModel(datos);
-         addEventoTabla(jTable_Lote);
-    }
-    
-    public void actualizarTabla() {
-        DefaultTableModel datos = Ctrl_Cajero.getTablaCajeros();
+
+        DefaultTableModel datos = ctrlLote.getTabla();
+
         this.jTable_Lote.setModel(datos);
         addEventoTabla(jTable_Lote);
     }
-    
+
+    @Override
+    public void actualizarTabla() {
+        Ctrl_Lote ctrlLote = new Ctrl_Lote();
+        DefaultTableModel datos = ctrlLote.getTabla();
+        this.jTable_Lote.setModel(datos);
+        addEventoTabla(jTable_Lote);
+    }
+
+    @Override
     public void addEventoTabla(JTable tabla) {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         ListSelectionModel modeloSeleccion = tabla.getSelectionModel();
@@ -228,25 +268,33 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
                 if (!e.getValueIsAdjusting()) {
                     desBloquerCampos();
                     activarBoton();
+                    recupararIndexDeTabla();
                 }
             }
         });
     }
-    
+
+    @Override
     public void recupararIndexDeTabla() {
-         indexSeleccioado = jTable_Cajeros.getSelectedRow();
-        String columna0 = jTable_Cajeros.getModel().getValueAt(indexSeleccioado, 3).toString();
-        int ID = Integer.parseInt(columna0);
-        lote = Ctrl_Lote.getLote(ID);
-        llenarCampos(lote);
+
+        indexSeleccioado = jTable_Lote.getSelectedRow();
+        if (indexSeleccioado >= 0) {
+            String columna0 = jTable_Lote.getValueAt(indexSeleccioado, 0).toString();
+            int ID = Integer.parseInt(columna0);
+            lote = ctrlLote.get(ID);
+            llenarCampos(lote);
+        }
+
     }
 
+    @Override
     public void llenarCampos(Lote lote) {
         this.jDate_Llegada.setDate(lote.getFechaLLegada());
-        this.jDate_Llegada.setDate(lote.getFechaRetiro());
+        this.jDate_Retiro.setDate(lote.getFechaRetiro());
         this.txt_Serie.setText(lote.getSerie());
     }
 
+    @Override
     public void activarBoton() {
         if (indexSeleccioado >= 0) {
             jButton_actualizar.setEnabled(true);
@@ -256,23 +304,27 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
             jButton_eliminar.setEnabled(false);
         }
     }
-    
+
+    @Override
     public void bloquerCampos() {
         this.jDate_Llegada.setEnabled(false);
         this.jDate_Retiro.setEnabled(false);
         this.txt_Serie.setEnabled(false);
     }
-    
+
+    @Override
     public void desBloquerCampos() {
         this.jDate_Llegada.setEnabled(true);
         this.jDate_Retiro.setEnabled(true);
         this.txt_Serie.setEnabled(true);
     }
-    
+
+    @Override
     public boolean camposVacios() {
         return jDate_Llegada.getDate() == null || jDate_Retiro.getDate() == null || txt_Serie.getText().isEmpty();
     }
-    
+
+    @Override
     public void recuperarCampos() {
         // Crear objeto de la clase Lote
         lote = new Lote();
@@ -289,7 +341,7 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         String serie = txt_Serie.getText();
         lote.setSerie(serie);
     }
-    
+
     boolean isDateOK(Date a, Date b) {
 
 // Verificar que la fecha de llegada sea menor a la fecha de retiro
@@ -301,36 +353,44 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
             // La fecha de llegada no es menor a la fecha de retiro, mostrar un mensaje de error o hacer algo
         }
     }
-    
+
+    @Override
     public void actualizar() {
+
         if (camposVacios()) {
             JOptionPane.showMessageDialog(this, "No deje campos vacios");
         } else {
-            recuperarCampos();
-            if (Ctrl_Lote.Actualizar(lote)) {
-                JOptionPane.showMessageDialog(this, "Lote actualizado");
-                limpiarCampos();
-                actualizarTabla();
+            if (isDateOK(jDate_Llegada.getDate(), jDate_Retiro.getDate())) {
+                recuperarCampos();
+                if (ctrlLote.Actualizar(lote)) {
+                    JOptionPane.showMessageDialog(this, "Lote actualizado");
+                    limpiarCampos();
+                    actualizarTabla();
+                }
+            }else{
+                 JOptionPane.showMessageDialog(this, "La fecha de retiro no puede ser inferiro");
             }
+            
+
         }
     }
-        
+
+    @Override
     public void eliminar() {
-        
-        if (Ctrl_Producto.Eliminar(lote.getID())) {
+
+        if (ctrlLote.Eliminar(lote.getID())) {
             indexSeleccioado = -1;
             activarBoton();
             limpiarCampos();
+            actualizarTabla();
         }
     }
-    
+
+    @Override
     public void limpiarCampos() {
         jDate_Llegada.setDate(null);
         jDate_Retiro.setDate(null);
         txt_Serie.setText("");
     }
 
-    
- 
- 
 }

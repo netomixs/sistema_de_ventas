@@ -11,9 +11,18 @@ public class Producto {
      private String Nombre;
      private String Descripcion;
      private int stock;
-     private int Lote;
+     private int LoteID;
      private String imgSrc;
      private String C_Barras;
+     private String nameLots;
+     private Lote Lotes;
+    public String getNameLots() {
+        return nameLots;
+    }
+
+    public void setNameLots(String nameLots) {
+        this.nameLots = nameLots;
+    }
 
     public Producto(int ID, int Tipo, float Precio, String Nombre, String Descripcion, int stock, int Lote, String imgSrc, String C_Barras) {
         this.ID = ID;
@@ -22,7 +31,7 @@ public class Producto {
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.stock = stock;
-        this.Lote = Lote;
+        this.LoteID = Lote;
         this.imgSrc = imgSrc;
         this.C_Barras = C_Barras;
     }
@@ -34,7 +43,7 @@ public class Producto {
         this.Precio = 0;
         this.Nombre = "";
         this.Descripcion = "";
-        this.Lote = 0;
+        this.LoteID = 0;
         this.imgSrc = "";
         this.C_Barras = "";
         this.stock=0;
@@ -88,12 +97,12 @@ public class Producto {
         this.Descripcion = Descripcion;
     }
 
-    public int getLote() {
-        return Lote;
+    public int getLoteID() {
+        return LoteID;
     }
 
-    public void setLote(int Lote) {
-        this.Lote = Lote;
+    public void setLoteID(int LoteID) {
+        this.LoteID = LoteID;
     }
 
     public String getImgSrc() {
@@ -110,6 +119,14 @@ public class Producto {
 
     public void setC_Barras(String C_Barras) {
         this.C_Barras = C_Barras;
+    }
+
+    public Lote getLotes() {
+        return Lotes;
+    }
+
+    public void setLotes(Lote Lotes) {
+        this.Lotes = Lotes;
     }
     
 }

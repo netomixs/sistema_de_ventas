@@ -89,5 +89,7 @@ public class Direccion {
     public void setNumero(String Numero) {
         this.Numero = Numero;
     }
-    
+    public String getDireccionCompleta(){
+        return this.getLocalidad()+",Calle: "+this.getCalle()+"Numero: "+getNumero();
+    }
 }

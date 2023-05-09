@@ -26,9 +26,16 @@ import modelo.Lote;
  */
 public class Ctrl_Correo {
 
-    final static String username = "netomixdeleong@gmail.com";
-    final static String password = "oepbaqkxhnucvubz";
+    final static String username = "diarioisc@alwaysdata.net";
+    final static String password = "pokemonDiamenteyPerla";
 
+    /**
+     * Prepara un mensaje sobre el inicio de sesion Si el usuario tienen un
+     * correo registrado llama a la funcion nde enviar correo En caso de que no
+     * se pide que ingrese uno y se envia el correo
+     *
+     * @param id
+     */
     public static final void enviarAdvertenciaSesion(int id) {
         String correo = Consultar(id);
         System.out.println(correo);
@@ -54,6 +61,13 @@ public class Ctrl_Correo {
 
     }
 
+    /**
+     * Inserta un correo a un usuario que no tenia
+     *
+     * @param id
+     * @param correo
+     * @return
+     */
     public static final boolean Crear(int id, String correo) {
         try {
             Connection cn = Conexion.conectar();
@@ -69,6 +83,13 @@ public class Ctrl_Correo {
         }
     }
 
+    /**
+     * Actualiza el correo del usuario
+     *
+     * @param id
+     * @param correo
+     * @return
+     */
     public static final boolean Actualizar(int id, String correo) {
         try {
             Connection cn = Conexion.conectar();
@@ -84,6 +105,12 @@ public class Ctrl_Correo {
         }
     }
 
+    /**
+     * Elimina el correo del usuario
+     *
+     * @param id
+     * @return
+     */
     public static final boolean Eliminar(int id) {
         try {
             Connection cn = Conexion.conectar();
@@ -98,6 +125,12 @@ public class Ctrl_Correo {
         }
     }
 
+    /**
+     * Recupera el correo del usuario
+     *
+     * @param id
+     * @return
+     */
     public static final String Consultar(int id) {
         String correo = "";
         try {
@@ -118,13 +151,24 @@ public class Ctrl_Correo {
         return correo;
     }
 
+    /**
+     * Se envia un correo a la direccion indicada usando el contenido indicado
+     *
+     * @param correoDestino
+     * @param asutno
+     * @param contenido
+     * @return
+     */
     public static final boolean enviar(String correoDestino, String asutno, String contenido) {
+        String servidor = "smtp-diarioisc.alwaysdata.net";//Servidor smtp
+        String puerto = "587";//puerto del servidor
         System.out.println("iniciando configuracion");
+        //Se prepara la configuracion
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", servidor);
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.port", puerto);
+        props.put("mail.smtp.socketFactory.port", puerto);
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         Session session = Session.getInstance(props,
@@ -152,5 +196,33 @@ public class Ctrl_Correo {
             System.out.println("Error!" + e);
             return false;
         }
+    }
+
+    public static void actualizarORegistrarCorreo(int id) {
+        // Comprobar si el correo ya existe
+        String correo = Consultar(id);
+        String mensaje;
+        boolean correoExiste = false; // Variable temporal, deberías reemplazar esto con tu lógica real
+        if (!correo.isEmpty()) {
+            mensaje = "Actualizar correo actual:";
+            correo = JOptionPane.showInputDialog(null, mensaje, "Correo actual" + correo, 1);
+            if(correo!=null   ){
+                if(!correo.isEmpty()){
+                     Actualizar(id, correo); 
+                }
+              
+            }
+            
+
+        } else {
+            mensaje = "Por favor, registre su correo electrónico:";
+            correo = JOptionPane.showInputDialog(null, mensaje, "Agregar nuevo correo", 1);
+             if(correo!=null || (!correo.isEmpty())){
+                 if(!correo.isEmpty()){
+                 Crear(id, correo);}
+                 
+            }
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
 import controlador.Ctrl_Correo;
@@ -23,7 +24,8 @@ public class FrmLoginCajero extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Login - SISTEMA DE VENTAS");
-        this.setSize(new Dimension(700, 500));
+        this.setSize(new Dimension(700, 520));
+        FormaterJtextField.limitarLongitudCampo(txt_usuario,8);
     }
 
     @Override
@@ -198,7 +200,7 @@ public class FrmLoginCajero extends javax.swing.JFrame {
         } else {
             Cajero cajero = new Cajero();
             cajero.setClave(this.txt_usuario.getText());
-                 cajero=Ctrl_Cajero.getCajer(cajero) ;
+                 cajero=Ctrl_Cajero.get(cajero) ;
             if (cajero!= null) {
                 FrmMenuCajero menu = new FrmMenuCajero(cajero);
 

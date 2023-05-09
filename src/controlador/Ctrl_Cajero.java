@@ -24,9 +24,12 @@ import modelo.Persona;
  * @author netom
  */
 public class Ctrl_Cajero {
-
-    public static final boolean Crear(Cajero cajero) {
-        boolean respuesta = false;
+     /**
+     *Registra un cajero en la base de datos
+     * @param cajero
+     * @return 
+     */
+    public static final boolean crear(Cajero cajero) {
         Ctrl_Persona p = new Ctrl_Persona();
         try {
             cajero.setPersona(p.Crear(cajero.getPersona()));
@@ -35,86 +38,90 @@ public class Ctrl_Cajero {
             cajero.setClave(generateRandomPassword(8));
             System.out.println(cajero.getClave());
             consulta.setString(1, cajero.getClave());
-
             consulta.execute();
-
             ResultSet rs = consulta.getResultSet();
             if (rs.next()) {
                 cajero.setID(Integer.parseInt(rs.getString(1)));
-
                 return relacionPersonaCajero(cajero);
             }
         } catch (SQLException e) {
             System.out.println("Error al crear usuario333: " + e);
-            eliminarPersona(cajero);
-          //  Ctrl_Persona.eliminarPersona(cajero.getPersona());
+            eliminar(cajero);
             return false;
         }
         return false;
     }
-
+  /**
+     *
+     * crear la relacion entre cajero y persona
+     * false si ocurrio algun error
+     * @param cajero
+     * @return
+     */
     private static boolean relacionPersonaCajero(Cajero cajero) {
         boolean respuesta = false;
         Ctrl_Persona p = new Ctrl_Persona();
         try {
-
             Connection cn = Conexion.conectar();
             CallableStatement consulta = cn.prepareCall("{ CALL Relacion_CajeroPersona(?,?)}");
             consulta.setInt(1, cajero.getPersona().getID());
             consulta.setInt(2, cajero.getID());
             System.out.println(cajero.getPersona().getID() + " " + cajero.getID());
-
             if (consulta.executeUpdate() > 0) {
-
                 return true;
             }
         } catch (SQLException e) {
             System.out.println("Error al crear relacion: " + e);
-            eliminarPersona(cajero);
-            // Ctrl_Persona.eliminarPersona(cajero.getPersona());
+            eliminar(cajero);
         }
         return false;
     }
-
-    public static void eliminarPersona(Cajero obj) {
+   /**
+     *Eliminar al cajero indicado en la base de datos
+     * @param cajero 
+     */
+    public static void eliminar(Cajero cajero) {
         Connection cn = Conexion.conectar();
-       
         try {
             CallableStatement consulta = cn.prepareCall("{CALL Eliminar_Cajero(?,?,?)}");
-            Ctrl_Persona.eliminarPersona(obj.getPersona());
-            consulta.setInt(1, obj.getID());
-            consulta.setInt(2, obj.getPersona().getID());
-            consulta.setInt(3, obj.getPersona().getDireccion().getID());
+            Ctrl_Persona.eliminarPersona(cajero.getPersona());
+            consulta.setInt(1, cajero.getID());
+            consulta.setInt(2, cajero.getPersona().getID());
+            consulta.setInt(3, cajero.getPersona().getDireccion().getID());
             consulta.execute();
-
             cn.close();
         } catch (SQLException e) {
 
         }
     }
-
-    public static boolean actualizarCajero(Cajero cajero) {
+       /**
+     *Actualiza los datos del cajero indicado
+     * @param cajero
+     * @return 
+     */
+    public static boolean actualizar(Cajero cajero) {
         Ctrl_Persona p = new Ctrl_Persona();
         try {
             p.Actualizar(cajero.getPersona());
-
+            return false;
         } catch (Exception e) {
             System.out.println("Error: " + e);
 
             return false;
         }
-        return true;
+        
     }
-
-    public static Cajero getCajer(Cajero cajero) {
-        boolean respuesta = false;
-
+   /**
+     *Se obtienen los datos del cajero indicado
+     * Prepara un objeto del tipo Cajero con el campo calve con la clave correcta
+     * @param cajero
+     * @return 
+     */
+    public static Cajero get(Cajero cajero) {
         try {
-
             Connection cn = Conexion.conectar();
             CallableStatement consulta = cn.prepareCall("{CALL Consultar_Cajero_By_Clave(?)}");
             consulta.setString(1, cajero.getClave());
-         
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
             if (rs.next()) {
@@ -139,7 +146,6 @@ public class Ctrl_Cajero {
                 cajero.setClave(rs.getString("ClaveAcceso"));
                 return cajero;
             }
-
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showInputDialog(null, "Error de conexion");
@@ -150,11 +156,8 @@ public class Ctrl_Cajero {
         boolean respuesta = false;
          List<Cajero>lista=new ArrayList<>();
         try {
-
             Connection cn = Conexion.conectar();
             CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_Cajeros()}");
-            
-           
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
            while (rs.next()) {
@@ -188,11 +191,16 @@ public class Ctrl_Cajero {
         }
        return lista;
     }
+    /**
+     *Genera un codigo randon combinando letras y numeros con una baja probabilidad de repeticion
+     *
+     * @param len
+     * @return
+     */
     private static String generateRandomPassword(int len)
     {
         // Rango ASCII – alfanumérico (0-9, a-z, A-Z)
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
- 
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
  
@@ -207,7 +215,11 @@ public class Ctrl_Cajero {
  
         return sb.toString();
     }
- public static DefaultTableModel getTablaCajeros(){
+     /**
+     *Recupera todos los cajeros
+     * @return 
+     */
+ public static DefaultTableModel getTabla(){
      DefaultTableModel model=new DefaultTableModel();
      List<Cajero>lista=getAllCajeros();
      String fila[]=new String[5];
@@ -222,7 +234,6 @@ public class Ctrl_Cajero {
          fila[3]=i.getClave();
          model.addRow(fila);
      }
-     
      return model;
  }
 }

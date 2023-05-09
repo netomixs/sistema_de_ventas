@@ -9,19 +9,21 @@ package modelo;
  * @author netom
  */
 public class Cajero {
-        private int ID;
+
+    private int ID;
     private String Clave;
     private Persona Persona;
-    public Cajero(int ID, String Clave,Persona persona) {
+
+    public Cajero(int ID, String Clave, Persona persona) {
         this.ID = ID;
         this.Clave = Clave;
-        this.Persona=persona;
+        this.Persona = persona;
     }
 
     public Cajero() {
-           this.ID = 0;
+        this.ID = 0;
         this.Clave = "";
-        this.Persona=new Persona();
+        this.Persona = new Persona();
     }
 
     public Persona getPersona() {
@@ -31,7 +33,7 @@ public class Cajero {
     public void setPersona(Persona persona) {
         this.Persona = persona;
     }
-    
+
     public int getID() {
         return ID;
     }
@@ -47,7 +49,5 @@ public class Cajero {
     public void setClave(String Clave) {
         this.Clave = Clave;
     }
-
-    
 
 }

@@ -3,6 +3,7 @@ package vista;
 import conexion.Conexion;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cliente;
+import controlador.Ctrl_Persona;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -32,14 +33,16 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
 
     private int idUsuario = 0;
     private Administrador admin;
+    private Administrador adminAux;
 
     public InterEditarAdministrador(Administrador admin) {
         initComponents();
-            this.setSize(new Dimension(720, 700));
-            this.setTitle("Cuenta");
+        //this.setSize(new Dimension(700, 650));
+        this.setTitle("Cuenta");
 
-            this.admin=admin;
-             ColocarInfo( admin);
+        this.admin = admin;
+        adminAux = admin;
+        ColocarInfo(admin);
     }
 
     /**
@@ -51,329 +54,293 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton_Guardar = new javax.swing.JButton();
-        jButton_Cancelar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txt_Curp = new javax.swing.JTextField();
         txt_Nombre = new javax.swing.JTextField();
-        txt_localidad = new javax.swing.JTextField();
-        txt_CP = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         txt_apellido1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txt_apellido2 = new javax.swing.JTextField();
-        jLabel = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        txt_apellido2 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         Jdate_Nacimiento = new com.toedter.calendar.JDateChooser();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_Curp = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel = new javax.swing.JLabel();
         cBox_estado = new javax.swing.JComboBox<>();
-        txt_Calle = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_localidad = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txt_CP = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        txt_num = new javax.swing.JTextField();
+        txt_Calle = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        txt_user = new javax.swing.JTextField();
+        txt_num = new javax.swing.JTextField();
+        jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        txt_user = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         txt_password1 = new javax.swing.JPasswordField();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         txt_password2 = new javax.swing.JPasswordField();
+        jButton_Guardar = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 10));
+        jPanel3.setLayout(new java.awt.GridLayout(13, 1));
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(160, 100));
+        jPanel2.setName(""); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(160, 100));
+        jPanel2.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setLabelFor(txt_Nombre);
+        jLabel2.setText("Nombre:");
+        jLabel2.setToolTipText("");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jLabel2.setMaximumSize(new java.awt.Dimension(61, 30));
+        jLabel2.setMinimumSize(new java.awt.Dimension(61, 30));
+        jLabel2.setPreferredSize(new java.awt.Dimension(61, 30));
+        jPanel2.add(jLabel2);
+
+        txt_Nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_Nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_Nombre.setDragEnabled(true);
+        txt_Nombre.setMinimumSize(new java.awt.Dimension(64, 30));
+        txt_Nombre.setPreferredSize(new java.awt.Dimension(160, 30));
+        jPanel2.add(txt_Nombre);
+
+        jPanel3.add(jPanel2);
+
+        jPanel4.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Apellido Paterno:");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel4.add(jLabel3);
+
+        txt_apellido1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_apellido1.setMinimumSize(new java.awt.Dimension(160, 24));
+        txt_apellido1.setPreferredSize(new java.awt.Dimension(160, 24));
+        jPanel4.add(txt_apellido1);
+
+        jPanel3.add(jPanel4);
+
+        jPanel5.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("Apellido Materno:");
+        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel5.add(jLabel9);
+
+        txt_apellido2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel5.add(txt_apellido2);
+
+        jPanel3.add(jPanel5);
+
+        jPanel6.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("Fecha de nacimiento:");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel6.add(jLabel7);
+        jPanel6.add(Jdate_Nacimiento);
+
+        jPanel3.add(jPanel6);
+
+        jPanel7.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Curp:");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel7.add(jLabel4);
+
+        txt_Curp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel7.add(txt_Curp);
+
+        jPanel3.add(jPanel7);
+
+        jPanel8.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel.setText("Estado:");
+        jLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel8.add(jLabel);
+
+        cBox_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California ", "Baja California Sur", "Campeche ", "Chiapas", "Chihuahua ", "Ciudad de México ", "Coahuila ", "Colima ", "Durango ", "Estado de México ", "Guanajuato ", "Guerrero ", "Hidalgo", "Jalisco ", "Michoacán ", "Morelos ", "Nayarit ", "Nuevo León ", "Oaxaca ", "Puebla", "Querétaro ", "Quintana Roo ", "San Luis Potosí ", "Sinaloa ", "Sonora ", "Tabasco ", "Tamaulipas ", "Tlaxcala ", "Veracruz ", "Yucatán ", "Zacatecas " }));
+        jPanel8.add(cBox_estado);
+
+        jPanel3.add(jPanel8);
+
+        jPanel9.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("Localidad:");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel9.add(jLabel5);
+
+        txt_localidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel9.add(txt_localidad);
+
+        jPanel3.add(jPanel9);
+
+        jPanel10.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Codigo postal:");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel10.add(jLabel6);
+
+        txt_CP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel10.add(txt_CP);
+
+        jPanel3.add(jPanel10);
+
+        jPanel11.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("Calle:");
+        jLabel8.setAlignmentX(1.0F);
+        jLabel8.setAlignmentY(10.0F);
+        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel11.add(jLabel8);
+
+        txt_Calle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel11.add(txt_Calle);
+
+        jPanel3.add(jPanel11);
+
+        jPanel12.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("No.Exterior:");
+        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel12.add(jLabel10);
+
+        txt_num.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel12.add(txt_num);
+
+        jPanel3.add(jPanel12);
+
+        jPanel13.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("Usuario:");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel13.add(jLabel11);
+
+        txt_user.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel13.add(txt_user);
+
+        jPanel3.add(jPanel13);
+
+        jPanel14.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel12.setText("Contraseña:");
+        jLabel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel14.add(jLabel12);
+        jPanel14.add(txt_password1);
+
+        jPanel3.add(jPanel14);
+
+        jPanel15.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Confrima Contraseña:");
+        jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel15.add(jLabel13);
+        jPanel15.add(txt_password2);
+
+        jPanel3.add(jPanel15);
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 310, 650));
 
         jButton_Guardar.setBackground(new java.awt.Color(129, 221, 37));
         jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Guardar.setText("Actualizar");
+        jButton_Guardar.setText("Guardar");
         jButton_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GuardarActionPerformed(evt);
             }
         });
-
-        jButton_Cancelar.setBackground(new java.awt.Color(226, 58, 43));
-        jButton_Cancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Cancelar.setText("Eliminar cuenta");
-        jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CancelarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Curp:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Nombre:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Apellido Paterno:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Localidad:");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Codigo postal:");
-
-        txt_Curp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        txt_Nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        txt_localidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        txt_CP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Datos de la cuenta");
-
-        txt_apellido1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Fecha de nacimiento:");
-
-        txt_apellido2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel.setText("Estado:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Apellido Materno:");
-
-        cBox_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California ", "Baja California Sur", "Campeche ", "Chiapas", "Chihuahua ", "Ciudad de México ", "Coahuila ", "Colima ", "Durango ", "Estado de México ", "Guanajuato ", "Guerrero ", "Hidalgo", "Jalisco ", "Michoacán ", "Morelos ", "Nayarit ", "Nuevo León ", "Oaxaca ", "Puebla", "Querétaro ", "Quintana Roo ", "San Luis Potosí ", "Sinaloa ", "Sonora ", "Tabasco ", "Tamaulipas ", "Tlaxcala ", "Veracruz ", "Yucatán ", "Zacatecas " }));
-
-        txt_Calle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Calle:");
-
-        txt_num.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("No.Exterior:");
-
-        txt_user.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Usuario:");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("Contraseña:");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Confrima Contraseña:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_localidad, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                .addComponent(txt_CP)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_Calle, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_num, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Nombre)
-                            .addComponent(txt_apellido1)
-                            .addComponent(txt_apellido2)
-                            .addComponent(Jdate_Nacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_user)
-                                    .addComponent(txt_password1)
-                                    .addComponent(txt_password2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_Cancelar)
-                        .addGap(60, 60, 60)
-                        .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Jdate_Nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Curp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel)
-                    .addComponent(cBox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_CP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_Calle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(txt_num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(txt_password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(txt_password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 590));
+        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 660, 210, 32));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-        if (txt_password1.getText().equals(txt_password1.getText())) {
+        if (campoVacio()) {
 
         } else {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
-        }
-        if (campoVacio()) {
-            JOptionPane.showMessageDialog(this, "Completa todos los campos");
-        } else {
-            recuperarDatos();
-            if (Ctrl_Admin.actualizarAdmin(admin)) {
-                JOptionPane.showMessageDialog(this, "Registro completado");
+            if (Ctrl_Persona.validarCurp(txt_Curp.getText())) {
+
+                if (txt_password1.getText().equals(txt_password2.getText())) {
+                    if (txt_password1.getText().isEmpty()) {
+                        recuperarDatos();
+                        if (Ctrl_Admin.actualizar(adminAux)) {
+                            JOptionPane.showMessageDialog(this, "Completado");
+                            admin = adminAux;
+
+                        } else {
+
+                        }
+                    } else {
+                        if (Ctrl_Persona.esContrasenaSegura(txt_password1.getText())) {
+                            recuperarDatos();
+                            if (Ctrl_Admin.actualizar(admin)) {
+                                JOptionPane.showMessageDialog(this, "Completado");
+
+                            } else {
+
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "La contraseña debe de tener mas de 5 caracteres.\n"
+                                    + "Y contener almenos uno de estos caractres !@#$%&*()_+-=[]|,./?>< ",
+                                    "Contraseña no es segura", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
+                }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                JOptionPane.showMessageDialog(this, "Formato de CURP no es valido");
             }
+
         }
-
-
     }//GEN-LAST:event_jButton_GuardarActionPerformed
-
-    private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
-        String opcioes[]={"Si","No"};
-        int op=JOptionPane.showOptionDialog(this,"¿Esta seguro que desea eliminar su cuenta?\n"
-                                            + "Perdera todos los privilegios.\n"
-                                            + "Esta accion es irreversible","¿Eliminar cuenta?",JOptionPane.OK_OPTION,0, null, opcioes,false);
-       // int op= JOptionPane.showConfirmDialog(this,);
-        this.setVisible(false);  
-        if(op==0){
-            //Si
-            Ctrl_Admin.eliminarPersona(admin);
-            System.exit(0);
-        }else{
-            //No
-        }
-        System.out.println(op);
-    }//GEN-LAST:event_jButton_CancelarActionPerformed
     void ColocarInfo(Administrador admin) {
-        txt_password1.setText(admin.getPassword());
+
         txt_user.setText(admin.getUsuario());
         txt_Nombre.setText(admin.getPersona().getNombre());
         txt_apellido1.setText(admin.getPersona().getApellidoP());
@@ -383,17 +350,29 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
         txt_localidad.setText(admin.getPersona().getDireccion().getLocalidad());
         txt_Calle.setText(admin.getPersona().getDireccion().getCalle());
         txt_num.setText(admin.getPersona().getDireccion().getNumero());
-        cBox_estado.setSelectedIndex(admin.getPersona().getDireccion().getEstado()-1733);
+        cBox_estado.setSelectedIndex(admin.getPersona().getDireccion().getEstado() - 1733);
         Jdate_Nacimiento.setDate(admin.getPersona().getNacimiento());
     }
 
     boolean campoVacio() {
         int i = 0;
-        if (txt_password1.getText().isEmpty()) {
-            i++;
+        if (txt_password1.getText().isEmpty() && txt_password2.getText().isEmpty()) {
+
+        } else {
+            if (txt_password1.getText().isEmpty()) {
+                i++;
+            }
+            if (txt_password2.getText().isEmpty()) {
+                i++;
+            }
         }
-        if (txt_password2.getText().isEmpty()) {
+        if (Jdate_Nacimiento.getDate() == null) {
             i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
         }
         if (txt_user.getText().isEmpty()) {
             i++;
@@ -425,6 +404,7 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
         if (i == 0) {
             return false;
         } else {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
             return true;
         }
     }
@@ -436,14 +416,19 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
     public void setAdmin(Administrador admin) {
         this.admin = admin;
     }
-    
 
     void recuperarDatos() {
         Persona p = new Persona();
         Direccion d = new Direccion();
-        admin.setPassword(txt_password1.getText());
-        admin.setUsuario(txt_user.getText());
-        p.setID(admin.getPersona().getID());
+
+        if (!txt_password1.getText().isEmpty() && !txt_password2.getText().isEmpty()) {
+            admin.setPassword(Ctrl_Persona.hashPassword(txt_password1.getText()));
+
+        } else {
+
+        }
+        adminAux.setUsuario(txt_user.getText());
+        p.setID(adminAux.getPersona().getID());
         p.setNombre(txt_Nombre.getText());
         p.setApellidoP(txt_apellido1.getText());
         p.setApellidoM(txt_apellido2.getText());
@@ -453,24 +438,22 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
         date.setTime(System.currentTimeMillis());
         System.out.println(date.toString());
         p.setFechaRegistro(date);
-        d.setID(admin.getPersona().getDireccion().getID());
+        d.setID(adminAux.getPersona().getDireccion().getID());
         d.setEstado(cBox_estado.getSelectedIndex() + 1733);
-        System.out.println("Estaod"+cBox_estado.getSelectedIndex() );
-        System.out.println("Estaod"+cBox_estado.getSelectedItem() );
+        System.out.println("Estaod" + cBox_estado.getSelectedIndex());
+        System.out.println("Estaod" + cBox_estado.getSelectedItem());
         d.setCP(txt_CP.getText());
         d.setLocalidad(txt_localidad.getText());
         d.setCalle(txt_Calle.getText());
         d.setNumero(txt_num.getText());
         p.setDireccion(d);
-        admin.setPersona(p);
+        adminAux.setPersona(p);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;
     private javax.swing.JComboBox<String> cBox_estado;
-    private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JButton jButton_Guardar;
     private javax.swing.JLabel jLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -483,9 +466,20 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField txt_CP;
     private javax.swing.JTextField txt_Calle;
     private javax.swing.JTextField txt_Curp;

@@ -1,10 +1,17 @@
 package vista;
 
-import controlador.Reportes;
+import controlador.Ctrl_Cliente;
+import controlador.Ctrl_Factura;
+import controlador.Ctrl_RangoCliente;
+import controlador.Ctrl_RegistrarVenta;
 import java.awt.Dimension;
+import java.time.LocalTime;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import modelo.Administrador;
 import modelo.Cajero;
+import modelo.Cliente;
+import modelo.RangoCliente;
 
 /**
  *
@@ -14,14 +21,14 @@ public class FrmMenuCajero extends javax.swing.JFrame {
 
     public static JDesktopPane jDesktopPane_menu;
     Cajero cajero;
-    
-    public FrmMenuCajero(Cajero cajero ) {
+
+    public FrmMenuCajero(Cajero cajero) {
         initComponents();
         this.setSize(new Dimension(1200, 700));
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setTitle("Sistema de Ventas");
-         this.cajero=cajero;
+        this.cajero = cajero;
         this.setLayout(null);
         jDesktopPane_menu = new JDesktopPane();
 
@@ -29,7 +36,6 @@ public class FrmMenuCajero extends javax.swing.JFrame {
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.jDesktopPane_menu.setBounds(0, 0, ancho, (alto - 110));
         this.add(jDesktopPane_menu);
-       
 
     }
 
@@ -44,30 +50,34 @@ public class FrmMenuCajero extends javax.swing.JFrame {
 
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem_nuevo_cliente = new javax.swing.JMenuItem();
         jMenuItem_gestionar_cliente = new javax.swing.JMenuItem();
+        jMenuItem_gestionar_cliente1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem_nueva_venta = new javax.swing.JMenuItem();
-        jMenuItem_gestionar_ventas = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem_cerrar_sesion = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem_cerrar_sesion1 = new javax.swing.JMenuItem();
 
         jMenuItem4.setText("jMenuItem4");
 
         jMenuItem15.setText("jMenuItem15");
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/user_84308.png"))); // NOI18N
         jMenu3.setText("Cliente");
         jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu3.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMenuItem_nuevo_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_nuevo_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo-cliente.png"))); // NOI18N
+        jMenuItem_nuevo_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/AGREGAR USER.png"))); // NOI18N
         jMenuItem_nuevo_cliente.setText("Nuevo Cliente");
         jMenuItem_nuevo_cliente.setPreferredSize(new java.awt.Dimension(180, 30));
         jMenuItem_nuevo_cliente.addActionListener(new java.awt.event.ActionListener() {
@@ -78,24 +88,36 @@ public class FrmMenuCajero extends javax.swing.JFrame {
         jMenu3.add(jMenuItem_nuevo_cliente);
 
         jMenuItem_gestionar_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_gestionar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
+        jMenuItem_gestionar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/3592853-align-employee-general-human-human-list-list-member_107786_1.png"))); // NOI18N
         jMenuItem_gestionar_cliente.setText("Gestionar Clientes");
+        jMenuItem_gestionar_cliente.setEnabled(false);
         jMenuItem_gestionar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem_gestionar_clienteActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem_gestionar_cliente);
+        jMenuItem_gestionar_cliente.setVisible(false);
+
+        jMenuItem_gestionar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem_gestionar_cliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/3592853-align-employee-general-human-human-list-list-member_107786_1.png"))); // NOI18N
+        jMenuItem_gestionar_cliente1.setText("Subir rango");
+        jMenuItem_gestionar_cliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_gestionar_cliente1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_gestionar_cliente1);
 
         jMenuBar1.add(jMenu3);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrito.png"))); // NOI18N
-        jMenu5.setText("Facturar");
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/shopping-cart_icon-icons.com_72552.png"))); // NOI18N
+        jMenu5.setText("Ventas");
         jMenu5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu5.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMenuItem_nueva_venta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_nueva_venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir.png"))); // NOI18N
+        jMenuItem_nueva_venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/choose4x_86996.png"))); // NOI18N
         jMenuItem_nueva_venta.setText("Nueva Venta");
         jMenuItem_nueva_venta.setPreferredSize(new java.awt.Dimension(200, 30));
         jMenuItem_nueva_venta.addActionListener(new java.awt.event.ActionListener() {
@@ -105,36 +127,36 @@ public class FrmMenuCajero extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem_nueva_venta);
 
-        jMenuItem_gestionar_ventas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_gestionar_ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones.png"))); // NOI18N
-        jMenuItem_gestionar_ventas.setText("Gestionar Ventas");
-        jMenuItem_gestionar_ventas.setPreferredSize(new java.awt.Dimension(200, 30));
-        jMenuItem_gestionar_ventas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_gestionar_ventasActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem_gestionar_ventas);
-
         jMenuBar1.add(jMenu5);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
-        jMenu8.setText("Cerrar Sesión");
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/calculator_icon-icons.com_54044.png"))); // NOI18N
+        jMenu8.setText("Corte de caja");
         jMenu8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu8.setPreferredSize(new java.awt.Dimension(200, 50));
-
-        jMenuItem_cerrar_sesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_cerrar_sesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
-        jMenuItem_cerrar_sesion.setText("Cerrar Sesión");
-        jMenuItem_cerrar_sesion.setPreferredSize(new java.awt.Dimension(150, 30));
-        jMenuItem_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_cerrar_sesionActionPerformed(evt);
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
             }
         });
-        jMenu8.add(jMenuItem_cerrar_sesion);
-
         jMenuBar1.add(jMenu8);
+
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/4115235-exit-logout-sign-out_114030.png"))); // NOI18N
+        jMenu9.setText("Cerrar Sesión");
+        jMenu9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu9.setPreferredSize(new java.awt.Dimension(200, 50));
+
+        jMenuItem_cerrar_sesion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem_cerrar_sesion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/4115235-exit-logout-sign-out_114030.png"))); // NOI18N
+        jMenuItem_cerrar_sesion1.setText("Cerrar Sesión");
+        jMenuItem_cerrar_sesion1.setPreferredSize(new java.awt.Dimension(150, 30));
+        jMenuItem_cerrar_sesion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_cerrar_sesion1ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem_cerrar_sesion1);
+
+        jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,33 +175,132 @@ public class FrmMenuCajero extends javax.swing.JFrame {
         interGestionarCliente.setVisible(true);
     }//GEN-LAST:event_jMenuItem_gestionar_clienteActionPerformed
 
-    private void jMenuItem_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_cerrar_sesionActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem_cerrar_sesionActionPerformed
-
     private void jMenuItem_nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nueva_ventaActionPerformed
+        abrirVentas();
+    }//GEN-LAST:event_jMenuItem_nueva_ventaActionPerformed
+    public static void abrirVentas() {
         InterFacturacion interFacturacion = new InterFacturacion();
         jDesktopPane_menu.add(interFacturacion);
         interFacturacion.setVisible(true);
-    }//GEN-LAST:event_jMenuItem_nueva_ventaActionPerformed
+        interFacturacion.setLocation(400, 50);
+    }
+    private void jMenuItem_cerrar_sesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_cerrar_sesion1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem_cerrar_sesion1ActionPerformed
 
-    private void jMenuItem_gestionar_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_ventasActionPerformed
-        InterGestionarVentas interGestionarVentas = new InterGestionarVentas();
-        jDesktopPane_menu.add(interGestionarVentas);
-        interGestionarVentas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem_gestionar_ventasActionPerformed
- 
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        LocalTime horaActual = LocalTime.now();
+        LocalTime horaLimiteInf = LocalTime.of(16, 0); // 3:00 PM
+        LocalTime horaLimiteSup = LocalTime.of(17, 0); // 4:00 PM
+System.out.println(horaActual);
+        if (horaActual.isAfter(horaLimiteInf) && horaActual.isBefore(horaLimiteSup)) {
+            // el código del método se ejecuta solo si la hora actual está entre las 3 y 4 de la tarde
+JOptionPane.showMessageDialog(
+    this,
+    "<html> <font size='14' color='green'>$" + Ctrl_Factura.corteCaja() + "</font></html>",
+    "Corte de caja",
+    JOptionPane.PLAIN_MESSAGE
+);        } else {
+            JOptionPane.showMessageDialog(this, "No se puede hacer el corte en la hora actual", "Corte de caja", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void jMenuItem_gestionar_cliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_cliente1ActionPerformed
+        String idCliente = JOptionPane.showInputDialog(null, "Ingrese numero de cliente");
+        int id = -1;
+        try {
+            if (idCliente != null && !idCliente.isEmpty()) {
+                if (idCliente.startsWith("52")) {
+                    if (idCliente.length() > 2) {
+                        String resultado = idCliente.substring(2);
+                        id = Integer.parseInt(resultado);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Numero de cliente es incorrecto");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El nuemero de cliente no pertenece a esta tienda.\n Debe de empezar por :\"52\".");
+                }
+
+                Cliente cliente = Ctrl_Cliente.get(id);
+                if (cliente  ==null) {
+                    JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+
+                }
+                if (cliente.getRango() < 2) {
+                    if (cliente.getPuntos() >= 500) {
+                        cliente.setRango(cliente.getRango() + 1);
+                        cliente.setPuntos(cliente.getPuntos() - 500);
+                        Ctrl_Cliente.actualizarPuntos(cliente.getID(), -500);
+                        if (Ctrl_Cliente.actualizar(cliente)) {
+                            cliente = Ctrl_Cliente.get(cliente.getID());
+                            RangoCliente r = Ctrl_RangoCliente.getRango(cliente.getRango());
+                            JOptionPane.showMessageDialog(this, "Felicidades!\nAhora eres rango " + r.getNombre(), "Subiste de rango", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Puntos restantes:" + cliente.getPuntos(), "Puntos", JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El cliente no cuenta con los suficientes puntos para asender");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El cliente se encuentra en el rango maximo");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No deje el campo vacio");
+            }
+        } catch (Exception e) {
+
+        }
+
+    }//GEN-LAST:event_jMenuItem_gestionar_cliente1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem_cerrar_sesion;
+    private javax.swing.JMenuItem jMenuItem_cerrar_sesion1;
     private javax.swing.JMenuItem jMenuItem_gestionar_cliente;
-    private javax.swing.JMenuItem jMenuItem_gestionar_ventas;
+    private javax.swing.JMenuItem jMenuItem_gestionar_cliente1;
     private javax.swing.JMenuItem jMenuItem_nueva_venta;
     private javax.swing.JMenuItem jMenuItem_nuevo_cliente;
     // End of variables declaration//GEN-END:variables
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmMenuCajero(null).setVisible(true);
+            }
+        });
+    }
 }

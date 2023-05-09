@@ -4,16 +4,12 @@
  */
 package vista;
 
-import com.mysql.fabric.xmlrpc.base.Data;
+import vista.Componentes.FormaterJtextField;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Persona;
-import java.awt.Color;
-import java.time.LocalDate;
 import java.util.Date;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import modelo.Administrador;
-import modelo.Cliente;
 import modelo.Direccion;
 import modelo.Persona;
 
@@ -21,7 +17,7 @@ import modelo.Persona;
  *
  * @author netom
  */
-public class InterNuevoadmin extends javax.swing.JInternalFrame  {
+public class InterNuevoadmin extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CrearAdmin
@@ -32,8 +28,19 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();
         this.setTitle("Nuevo administrador");
-       // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
+        // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
         admin = new Administrador();
+        FormaterJtextField.limitarLongitudCampo(this.txt_Curp, 18);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Calle, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_CP, 5);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Nombre, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_localidad, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_num, 10);
+        FormaterJtextField.limitarLongitudCampo(this.txt_password1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_password2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_user, 50);
     }
 
     /**
@@ -81,7 +88,6 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -333,7 +339,7 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
                         .addComponent(txt_password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,10 +361,9 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 612, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(0, 7, Short.MAX_VALUE)))
         );
 
         pack();
@@ -366,117 +371,97 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-            if(txt_password1.getText().equals(txt_password1.getText())){
-                
-            }else{
-                  JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
-            }
-            if(campoVacio()){
-                  JOptionPane.showMessageDialog(this, "Completa todos los campos");
-            }else{
-                recuperarDatos();
-                if(Ctrl_Admin.Crear(admin)){
-                    JOptionPane.showMessageDialog(this, "Registro completado");
-           
-                }else{
-                    JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
-                }
-            }
-      /*  if (!txt_Curp.getText().isEmpty() && !txt_Nombre.getText().isEmpty() && !txt_cedula.getText().isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "Correcto");
+        if (campoVacio()) {
 
-            if (!controlCliente.existeCliente(txt_cedula.getText().trim())) {
-
-                cliente.setNombre(txt_Curp.getText().trim());
-                cliente.setApellido(txt_Nombre.getText().trim());
-                cliente.setCedula(txt_cedula.getText().trim());
-                cliente.setTelefono(txt_localidad.getText().trim());
-                cliente.setDireccion(txt_CP.getText().trim());
-                cliente.setEstado(1);
-
-                if (controlCliente.guardar(cliente)) {
-                    JOptionPane.showMessageDialog(null, "Registro Guardado");
-                    txt_Curp.setBackground(Color.green);
-                    txt_Nombre.setBackground(Color.green);
-                    txt_cedula.setBackground(Color.green);
-                    txt_localidad.setBackground(Color.green);
-                    txt_CP.setBackground(Color.green);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al Guardar");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "El cliente ya esta registrado en la Base de Datos.");
-                txt_Curp.setBackground(Color.white);
-                txt_Nombre.setBackground(Color.white);
-                txt_cedula.setBackground(Color.white);
-                txt_localidad.setBackground(Color.white);
-                txt_CP.setBackground(Color.white);
-            }
         } else {
-            JOptionPane.showMessageDialog(null, "Completa todos los campos");
-            txt_Curp.setBackground(Color.red);
-            txt_Nombre.setBackground(Color.red);
-            txt_cedula.setBackground(Color.red);
-            txt_localidad.setBackground(Color.red);
-            txt_CP.setBackground(Color.red);
-        }/*/
-        //metodo limpiar
-   
+            if (Ctrl_Persona.validarCurp(txt_Curp.getText())) {
+                if (txt_password1.getText().equals(txt_password2.getText())) {
+                    if (Ctrl_Persona.esContrasenaSegura(txt_password1.getText())) {
+                        recuperarDatos();
+                        admin.setPassword(Ctrl_Persona.hashPassword(admin.getPassword()));
+                        if (Ctrl_Admin.crear(admin)) {
+                            JOptionPane.showMessageDialog(this, "Registro completado");
+                                admin=new Administrador();
+                                limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La contraseña debe de tener mas de 5 caracteres.\n"
+                                + "Y contener almenos uno de estos caractres !@#$%&*()_+-=[]|,./?>< ", "Contraseña no es segura", 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Formato de CURP invalido");
+            }
+
+        }
+
+
     }//GEN-LAST:event_jButton_GuardarActionPerformed
 
     private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton_CancelarActionPerformed
 
+    boolean campoVacio() {
+        int i = 0;
+        if (txt_password1.getText().isEmpty()) {
+            i++;
+        }
+        if (Jdate_Nacimiento.getDate() == null) {
+            i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
+        }
+        if (txt_password2.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_user.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_Nombre.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_apellido1.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_apellido2.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_Curp.getText().isEmpty()) {
+            i++;
+        }
 
-
-    boolean campoVacio(){                  
-                int i=0;                        
-        if(txt_password1.getText().isEmpty()){
+        if (txt_CP.getText().isEmpty()) {
             i++;
         }
-        if(txt_password2.getText().isEmpty()){
+        if (txt_localidad.getText().isEmpty()) {
             i++;
         }
-        if(txt_user.getText().isEmpty()){
+        if (txt_Calle.getText().isEmpty()) {
             i++;
         }
-        if(txt_Nombre.getText().isEmpty()){
+        if (txt_num.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido1.getText().isEmpty()){
-            i++;
+        if (i == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
+            return true;
         }
-        if(txt_apellido2.getText().isEmpty()){
-            i++;
-        }
-        if(txt_Curp.getText().isEmpty()){
-            i++;
-        }
-
-        if(txt_CP.getText().isEmpty()){
-            i++;
-        }
-        if(txt_localidad.getText().isEmpty()){
-            i++;
-        }
-        if(txt_Calle.getText().isEmpty()){
-            i++;
-        }
-        if(txt_num.getText().isEmpty()){
-            i++;
-        }
-      if(i==0){
-          return false;
-      }else{
-          return true;
-      }
     }
 
     void recuperarDatos() {
+        admin = new Administrador();
         Persona p = new Persona();
-        Direccion d=new Direccion();
+        Direccion d = new Direccion();
         admin.setPassword(txt_password1.getText());
         admin.setUsuario(txt_user.getText());
         p.setNombre(txt_Nombre.getText());
@@ -488,14 +473,31 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame  {
         date.setTime(System.currentTimeMillis());
         System.out.println(date.toString());
         p.setFechaRegistro(date);
-       d.setEstado(cBox_estado.getSelectedIndex()+1733);
-       d.setCP(txt_CP.getText());
-       d.setLocalidad(txt_localidad.getText());
-       d.setCalle(txt_Calle.getText());
-       d.setNumero(txt_num.getText());
+        d.setEstado(cBox_estado.getSelectedIndex() + 1733);
+        d.setCP(txt_CP.getText());
+        d.setLocalidad(txt_localidad.getText());
+        d.setCalle(txt_Calle.getText());
+        d.setNumero(txt_num.getText());
         p.setDireccion(d);
-       admin.setPersona(p);
-       
+        admin.setPersona(p);
+
+    }
+
+    void limpiar() {
+
+        txt_user.setText("");
+        txt_Nombre.setText("");
+        txt_apellido1.setText("");
+        txt_apellido2.setText("");
+        txt_Curp.setText("");
+        txt_CP.setText("");
+        txt_localidad.setText("");
+        txt_Calle.setText("");
+        txt_num.setText("");
+        cBox_estado.setSelectedIndex(0);
+        Jdate_Nacimiento.setDate(new Date());
+        txt_password1.setText("");
+        txt_password2.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;

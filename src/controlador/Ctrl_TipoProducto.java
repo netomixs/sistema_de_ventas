@@ -5,8 +5,7 @@
 package controlador;
 
 import conexion.Conexion;
-import static controlador.Ctrl_Admin.eliminarPersona;
-import static controlador.Ctrl_Producto.getAll;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,9 +17,19 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Administrador;
 import modelo.Producto;
 import modelo.TIpo_Producto;
+import static controlador.Ctrl_Admin.eliminar;
 
+/**
+ *Clase que controla las interacciones de la base de datos
+ * @author netom
+ */
 public class Ctrl_TipoProducto {
 
+    /**
+     *Crea un tipo de de prodcuto y lo registra de la base de datos
+     * @param tipo
+     * @return
+     */
     public static final boolean Crear(String tipo) {
         try {
             Connection cn = Conexion.conectar();
@@ -29,13 +38,19 @@ public class Ctrl_TipoProducto {
             consulta.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error al crear usuario: " + e);
+            System.out.println("Error al crear Tipo prodcutos: " + e);
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
             return false;
         }
 
     }
 
+    /**
+     *Actualiza el nombre del tipo de productos
+     * @param id
+     * @param tipo
+     * @return
+     */
     public static final boolean Actualizar(int id, String tipo) {
         try {
             Connection cn = Conexion.conectar();
@@ -52,6 +67,11 @@ public class Ctrl_TipoProducto {
 
     }
 
+    /**
+     *Elimina el tipo de prodcuto de la base de datos
+     * @param id
+     * @return
+     */
     public static final boolean Elimniar(int id) {
         try {
             Connection cn = Conexion.conectar();
@@ -67,11 +87,15 @@ public class Ctrl_TipoProducto {
 
     }
 
+    /**
+     *Recupera una lista de la tipos de prodcutos de la base de datos
+     * @return
+     */
     public static final List<TIpo_Producto> getAll() {
         List<TIpo_Producto> lista = new ArrayList<>();
         try {
             Connection cn = Conexion.conectar();
-            CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_TipoProductos()}");
+            CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_Tipo_Producto()}");
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
             while (rs.next()) {
@@ -89,6 +113,11 @@ public class Ctrl_TipoProducto {
         return lista;
     }
 
+    /**
+     *Recupera el tipo de prodcuto indicado por ID
+     * @param id
+     * @return
+     */
     public static final TIpo_Producto getTipo(int id) {
         List<TIpo_Producto> lista = getAll();
         for (TIpo_Producto i : lista) {
@@ -100,6 +129,11 @@ public class Ctrl_TipoProducto {
 
     }
 
+    /**
+     *Recupera el tipo de prodcuto indicado por Nombre
+     * @param nombre
+     * @return
+     */
     public static final TIpo_Producto getTipo(String nombre) {
         List<TIpo_Producto> lista = getAll();
         for (TIpo_Producto i : lista) {
@@ -108,9 +142,30 @@ public class Ctrl_TipoProducto {
             }
         }
         return new TIpo_Producto(0, "Error");
-
     }
 
+    /**
+     *Recupera el index del tipo del producto buiscado por el ID
+     * @param id
+     * @return
+     */
+    public static final int getIndex(int id) {
+        List<TIpo_Producto> lista = getAll();
+        int index = 0;
+        for (TIpo_Producto i : lista) {
+            if (i.getID() == id) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    /**
+     *Consulta si un tipo de prodcuto existe
+     * @param nombre
+     * @return
+     */
     public static final boolean existe(String nombre) {
         List<TIpo_Producto> lista = getAll();
         for (TIpo_Producto i : lista) {
@@ -122,9 +177,14 @@ public class Ctrl_TipoProducto {
 
     }
 
+    /**
+     *Recupera una tabla de los tipos de prodcutos
+     * @return
+     */
     public static DefaultTableModel getTabla() {
-        DefaultTableModel model = new DefaultTableModel();
+    
         List<TIpo_Producto> lista = getAll();
+            DefaultTableModel model = new DefaultTableModel();
         String fila[] = new String[2];
         model.addColumn("Id");
         model.addColumn("Nombre");

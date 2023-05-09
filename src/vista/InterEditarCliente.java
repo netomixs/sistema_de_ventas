@@ -4,6 +4,7 @@
  */
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import com.mysql.fabric.xmlrpc.base.Data;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
@@ -24,22 +25,34 @@ import modelo.Persona;
  *
  * @author netom
  */
-public final class InterEditarCliente extends javax.swing.JInternalFrame  {
-  
+public final class InterEditarCliente extends javax.swing.JInternalFrame {
+
     /**
      * Creates new form CrearAdmin
      */
     Cliente cliente;
 
+    /**
+     *
+     * @param ID
+     */
     public InterEditarCliente(int ID) {
         initComponents();
-    
-       // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
+
+        // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
         cliente = new Cliente();
-  
-        
-        cliente=Ctrl_Cliente.getCliente(ID);
+
+        cliente = Ctrl_Cliente.get(ID);
         ColocarInfo(cliente);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Curp, 18);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Calle, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_CP, 5);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Nombre, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_localidad, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_num, 10);
+        FormaterJtextField.limitarLongitudCampo(this.txt_telefono, 10);
     }
 
     /**
@@ -81,6 +94,7 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
         txt_telefono = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -311,7 +325,7 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,19 +336,17 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 2, Short.MAX_VALUE)))
+                    .addGap(0, 6, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -346,17 +358,19 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-        if(campoVacio()){
-            JOptionPane.showMessageDialog(this, "Completa todos los campos");
-        }else{
-            recuperarDatos();
+        if (campoVacio()) {
             
-            if(Ctrl_Cliente.actualizarCliente(cliente)){
-                JOptionPane.showMessageDialog(this, "Actualizado");
-             
+        } else {
+            if (Ctrl_Persona.validarCurp(txt_Curp.getText())) {
+                recuperarDatos();
+                if (Ctrl_Cliente.actualizar(cliente)) {
+                    JOptionPane.showMessageDialog(this, "Actualizado");
 
-            }else{
-                JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Formato de CURP no es valido");
             }
         }
     }//GEN-LAST:event_jButton_GuardarActionPerformed
@@ -371,52 +385,61 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
         txt_localidad.setText(cliente.getPersona().getDireccion().getLocalidad());
         txt_Calle.setText(cliente.getPersona().getDireccion().getCalle());
         txt_num.setText(cliente.getPersona().getDireccion().getNumero());
-        cBox_estado.setSelectedIndex(cliente.getPersona().getDireccion().getEstado()-1733);
+        cBox_estado.setSelectedIndex(cliente.getPersona().getDireccion().getEstado() - 1733);
         Jdate_Nacimiento.setDate(cliente.getPersona().getNacimiento());
+        txt_telefono.setText(cliente.getTelefono());
     }
 
+    boolean campoVacio() {
+        int i = 0;
 
-    boolean campoVacio(){                  
-                int i=0;                        
+        if (txt_Nombre.getText().isEmpty()) {
+            i++;
+        }
+        if (Jdate_Nacimiento.getDate() == null) {
+            i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
+        }
+        if (txt_apellido1.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_apellido2.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_Curp.getText().isEmpty()) {
+            i++;
+        }
 
-        if(txt_Nombre.getText().isEmpty()){
+        if (txt_CP.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido1.getText().isEmpty()){
+        if (txt_localidad.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido2.getText().isEmpty()){
+        if (txt_Calle.getText().isEmpty()) {
             i++;
         }
-        if(txt_Curp.getText().isEmpty()){
+        if (txt_num.getText().isEmpty()) {
             i++;
         }
-
-        if(txt_CP.getText().isEmpty()){
+        if (txt_telefono.getText().isEmpty()) {
             i++;
         }
-        if(txt_localidad.getText().isEmpty()){
-            i++;
+        if (i == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
+            return true;
         }
-        if(txt_Calle.getText().isEmpty()){
-            i++;
-        }
-        if(txt_num.getText().isEmpty()){
-            i++;
-        }
-           if(txt_telefono.getText().isEmpty()){
-            i++;
-        }
-      if(i==0){
-          return false;
-      }else{
-          return true;
-      }
     }
 
     void recuperarDatos() {
         Persona p = new Persona();
-        Direccion d=new Direccion();
+        Direccion d = new Direccion();
         p.setID(cliente.getPersona().getID());
         p.setNombre(txt_Nombre.getText());
         p.setApellidoP(txt_apellido1.getText());
@@ -427,16 +450,16 @@ public final class InterEditarCliente extends javax.swing.JInternalFrame  {
         date.setTime(System.currentTimeMillis());
         System.out.println(date.toString());
         p.setFechaRegistro(date);
-       d.setID(cliente.getPersona().getDireccion().getID());
-       d.setEstado(cBox_estado.getSelectedIndex()+1733);
-       d.setCP(txt_CP.getText());
-       d.setLocalidad(txt_localidad.getText());
-       d.setCalle(txt_Calle.getText());
-       d.setNumero(txt_num.getText());
+        d.setID(cliente.getPersona().getDireccion().getID());
+        d.setEstado(cBox_estado.getSelectedIndex() + 1733);
+        d.setCP(txt_CP.getText());
+        d.setLocalidad(txt_localidad.getText());
+        d.setCalle(txt_Calle.getText());
+        d.setNumero(txt_num.getText());
         p.setDireccion(d);
-       cliente.setPersona(p);
-       cliente.setTelefono(txt_telefono.getText());
-       
+        cliente.setPersona(p);
+        cliente.setTelefono(txt_telefono.getText());
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;

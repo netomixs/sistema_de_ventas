@@ -1,17 +1,15 @@
 package vista;
 
-import conexion.Conexion;
 import controlador.Ctrl_Lote;
-import controlador.Ctrl_Producto;
 import java.awt.Dimension;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 import modelo.Lote;
-import modelo.Producto;
 
 /**
  *
@@ -22,7 +20,8 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
     public InterNuevoLote() {
         initComponents();
         setTitle("Actualizar Stock de los Productos");
-        
+           this.setSize(new Dimension(400, 300));
+           limitarLongitudCampo(txt_Serie, 10);
     }
     Lote lote;
 
@@ -44,8 +43,8 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
         txt_Serie = new javax.swing.JTextField();
         jDate_Llegada = new com.toedter.calendar.JDateChooser();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
-        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -135,13 +134,17 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
     }
 
     void registrar() {
+        Ctrl_Lote ctrlLote =new Ctrl_Lote();
         if (camposVacios()) {
             JOptionPane.showMessageDialog(this, "Rellene todos los campos");
-            if (isDateOK(lote.getFechaLLegada(), lote.getFechaRetiro())) {
-                if (Ctrl_Lote.existe(lote.getSerie())) {
+   
+        }else{
+            recuperarCampos();
+               if (isDateOK(lote.getFechaLLegada(), lote.getFechaRetiro())) {
+                if (ctrlLote.existe(lote.getSerie())) {
                     JOptionPane.showMessageDialog(this, "Ya existe un lote identificado por " + lote.getSerie());
                 } else {
-                    if (Ctrl_Lote.Crear(lote)) {
+                    if (ctrlLote.Crear(lote)) {
                         JOptionPane.showMessageDialog(this, "Registro existoso");
                         limpiarCampos();
                     } else {
@@ -151,7 +154,6 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "La fecha de retiro no puede ser menor a la de entrada");
             }
-
         }
 
     }
@@ -160,5 +162,24 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
         jDate_Llegada.setDate(null);
         jDate_Salida.setDate(null);
         txt_Serie.setText("");
+    }
+        static void limitarLongitudCampo(JTextField campo, int maxChars) {
+        PlainDocument doc = (PlainDocument) campo.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offs, String str, AttributeSet a) throws BadLocationException {
+                if ((fb.getDocument().getLength() + str.length()) <= maxChars) {
+                    super.insertString(fb, offs, str, a);
+                }
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offs, int length, String str, AttributeSet a) throws BadLocationException {
+                if ((fb.getDocument().getLength() + str.length() - length) <= maxChars) {
+                    super.replace(fb, offs, length, str, a);
+                }
+            }
+        });
+
     }
 }

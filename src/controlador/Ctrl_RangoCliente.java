@@ -20,7 +20,12 @@ import modelo.TIpo_Producto;
  * @author netom
  */
 public class Ctrl_RangoCliente {
-
+   /**
+     *Crear rango de cliente
+     * @param nombre
+     * @param color
+     * @return
+     */
     public static final boolean Crear(String nombre, String color) {
         try {
             Connection cn = Conexion.conectar();
@@ -36,7 +41,11 @@ public class Ctrl_RangoCliente {
         }
        
     }
-
+  /**
+     *Actualiza rango de cliente
+     * @param rango
+     * @return
+     */
     public static final boolean Actualizar(RangoCliente rango) {
         try {
             Connection cn = Conexion.conectar();
@@ -53,7 +62,11 @@ public class Ctrl_RangoCliente {
         }
        
     }
-
+  /**
+     *Elimina rango de cliente
+     * @param id
+     * @return
+     */
     public static final boolean Elimniar(int id) {
         try {
             Connection cn = Conexion.conectar();
@@ -68,12 +81,15 @@ public class Ctrl_RangoCliente {
         }
   
     }
-
+  /**
+     *Recupera la lsita de los rango de cleinte
+     * @return
+     */
     public static final List<RangoCliente> getAllRangos() {
         List<RangoCliente> lista = new ArrayList<>();
         try {
             Connection cn = Conexion.conectar();
-            CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_RangoClientes()}");
+            CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_Rangocliente()}");
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
             while (rs.next()) {
@@ -90,6 +106,11 @@ public class Ctrl_RangoCliente {
         }
         return lista;
     }
+      /**
+     *Recupera los datos d3e un rango de cleinte especifico
+     * @param id
+     * @return
+     */
       public static final RangoCliente getRango(int id) {
          RangoCliente rango = new RangoCliente();
         try {

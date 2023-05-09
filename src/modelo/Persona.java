@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 /**
@@ -116,4 +118,5 @@ public class Persona {
 public String getApelldios(){
     return ApellidoP+" "+ApellidoM;
 }
+
 }

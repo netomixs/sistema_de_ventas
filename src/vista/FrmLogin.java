@@ -1,7 +1,9 @@
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Correo;
+import controlador.Ctrl_Persona;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,12 +23,14 @@ public class FrmLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Login");
         this.setSize(new Dimension(700, 520));
+        FormaterJtextField.limitarLongitudCampo(txt_usuario,50);
+        FormaterJtextField.limitarLongitudCampo(txt_password,50);
        
     }
 
     @Override
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/ventas.png"));
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("/Recursos/img/LogoSalesWear-3@0,25x.png"));
         return retValue;
     }
 
@@ -66,7 +70,7 @@ public class FrmLogin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(getIconImage());
+        setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
@@ -196,13 +200,14 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IniciarSesionActionPerformed
-            if(this.txt_usuario.getText().isEmpty()||this.txt_password.getText().isEmpty()){
+
+        if(this.txt_usuario.getText().isEmpty()||this.txt_password.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this,"Completa todos los campos");
             }else{
                 Administrador admi=new Administrador();
                 admi.setUsuario(this.txt_usuario.getText());
-                admi.setPassword(this.txt_password.getText());
-               if( Ctrl_Admin.getAdmin(admi)!=null){
+                admi.setPassword(Ctrl_Persona.hashPassword(this.txt_password.getText()));
+               if( Ctrl_Admin.get(admi)!=null){
                    FrmMenu menu=new FrmMenu();
                    menu.setAdmin(admi);
                    menu.setVisible(true);

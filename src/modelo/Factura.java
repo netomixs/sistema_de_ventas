@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -9,6 +10,7 @@ public class Factura {
     private int cliente;
     private Date Fecha;
     private float total;
+    private Time hora;
 
     public Factura(int ID, int cliente, Date Fecha) {
         this.ID = ID;
@@ -51,6 +53,14 @@ public class Factura {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
         
 }

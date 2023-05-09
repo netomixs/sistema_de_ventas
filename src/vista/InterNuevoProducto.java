@@ -1,15 +1,23 @@
 package vista;
 
+import vista.Componentes.DoublePositivoDocumentFilter;
+import vista.Componentes.EnteroPositivoDocumentFilter;
+import controlador.Ctrl_Lote;
 import controlador.Ctrl_Producto;
 import controlador.Ctrl_TipoProducto;
 import java.awt.Dimension;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
+import modelo.Lote;
 import modelo.Producto;
 import modelo.TIpo_Producto;
 
@@ -20,17 +28,27 @@ import modelo.TIpo_Producto;
 public class InterNuevoProducto extends javax.swing.JInternalFrame {
 
     Producto producto;
+    List<TIpo_Producto> lista;
 
     public InterNuevoProducto() {
+        PlainDocument doc;
+        lista = Ctrl_TipoProducto.getAll();
         initComponents();
-        this.setSize(new Dimension(400, 300));
+        this.setSize(new Dimension(421, 383));
         this.setTitle("Nuevo Producto");
-        limitarLongitudCampo(txt_Barra, 20);
-        limitarLongitudCampo(txt_cantidad, 5);
+       
+        //Evitar que se ingresen valores negativos no enteros que no sean mas de 11 caractres a el campo de cantidad
+        doc = (PlainDocument) txt_cantidad.getDocument();
+        doc.setDocumentFilter(new EnteroPositivoDocumentFilter(11));
+        txt_cantidad.setDocument(doc);
+        //Evitar que se ingresen valores negativos del tipo souble que no sean mas de 11 caractres a el campo de cantidad
+        doc=(PlainDocument) txt_precio.getDocument();
+        doc.setDocumentFilter(new DoublePositivoDocumentFilter(11));
+        //Restriccion de caractres
+         limitarLongitudCampo(txt_Barra, 20);
         limitarLongitudCampo(txt_descripcion1, 200);
         limitarLongitudCampo(txt_lote, 10);
         limitarLongitudCampo(txt_nombre, 50);
-        limitarLongitudCampo(txt_precio, 8);
         cargarTiposProductos();
     }
 
@@ -56,7 +74,6 @@ public class InterNuevoProducto extends javax.swing.JInternalFrame {
         txt_lote = new javax.swing.JTextField();
 
         setClosable(true);
-        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -100,12 +117,17 @@ public class InterNuevoProducto extends javax.swing.JInternalFrame {
         getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 170, -1));
 
         txt_precio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precioActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 170, -1));
 
         txt_Barra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_Barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 170, -1));
 
-        jButton_Guardar.setBackground(new java.awt.Color(0, 204, 204));
+        jButton_Guardar.setBackground(new java.awt.Color(129, 221, 37));
         jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Guardar.setText("Guardar");
         jButton_Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +135,7 @@ public class InterNuevoProducto extends javax.swing.JInternalFrame {
                 jButton_GuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 90, 30));
+        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 90, 30));
 
         txt_descripcion1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_descripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 170, -1));
@@ -132,12 +154,16 @@ public class InterNuevoProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
-registrar();
+        registrar();
     }//GEN-LAST:event_jButton_GuardarActionPerformed
+
+    private void txt_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_precioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<TIpo_Producto> comBox_Tipo;
+    private javax.swing.JComboBox<String> comBox_Tipo;
     private javax.swing.JButton jButton_Guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -159,16 +185,25 @@ registrar();
      * Metodo para limpiar campos
      */
     void registrar() {
+        Ctrl_Producto ctrlProducto=new Ctrl_Producto();
+        Ctrl_Lote ctrLote=new Ctrl_Lote();
         if (camposVacios()) {
             JOptionPane.showMessageDialog(this, "Rellena todos los campos");
+
         } else {
-            if (Ctrl_Producto.existe(producto.getC_Barras())) {
+            recuperarCampos();
+            if (ctrlProducto.existe(producto.getC_Barras())) {
                 JOptionPane.showMessageDialog(this, "El codigo de barras asociado ya existe");
             } else {
-                recuperarCampos();
-                if (Ctrl_Producto.Crear(producto)) {
-                    JOptionPane.showMessageDialog(this, "Prodcuto registrado");
-                    limpiar();
+                if (ctrLote.existe(this.txt_lote.getText())) {
+                    if (ctrlProducto.Crear(producto)) {
+                        JOptionPane.showMessageDialog(this, "Prodcuto registrado");
+                        limpiar();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Prodcuto no registrado");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Lote no existe");
                 }
 
             }
@@ -178,8 +213,8 @@ registrar();
     private void limpiar() {
         // Limpiar los campos de texto
         txt_nombre.setText("");
-        txt_descripcion1.setText("");
-        txt_precio.setText("");
+        txt_descripcion1.setText("0");
+        this.txt_precio.setText("0");
         txt_cantidad.setText("");
         txt_lote.setText("");
         txt_Barra.setText("");
@@ -191,7 +226,7 @@ registrar();
 
     void recuperarCampos() {
         producto = new Producto();
-
+        Ctrl_Lote ctrlLote=new Ctrl_Lote();
 // Obtener los valores de los campos de texto
         String nombre = txt_nombre.getText();
         String descripcion = txt_descripcion1.getText();
@@ -200,41 +235,43 @@ registrar();
         String cantidadString = txt_cantidad.getText();
         int cantidad = Integer.parseInt(cantidadString);
         String loteString = txt_lote.getText();
-        int lote = Integer.parseInt(loteString);
-        String codigoBarras = txt_Barra.getText();
+        Lote l = ctrlLote.get(loteString);
+        int lote = 0;
+        if (l != null) {
+            lote = l.getID();
 
-// Obtener el tipo de producto seleccionado en el JComboBox
-        TIpo_Producto tipoSeleccionado = (TIpo_Producto) comBox_Tipo.getSelectedItem();
-        int tipo = tipoSeleccionado.getID();
+        }
+        String codigoBarras = txt_Barra.getText();
 
 // Establecer los valores obtenidos en el objeto Producto
         producto.setNombre(nombre);
         producto.setDescripcion(descripcion);
         producto.setPrecio(precio);
         producto.setStock(cantidad);
-        producto.setLote(lote);
+        producto.setLoteID(lote);
         producto.setC_Barras(codigoBarras);
-        producto.setTipo(tipo);
+
+        producto.setTipo(lista.get(comBox_Tipo.getSelectedIndex()).getID());
 
     }
 
     public boolean camposVacios() {
         return txt_Barra.getText().isEmpty()
-                && txt_cantidad.getText().isEmpty()
-                && txt_descripcion1.getText().isEmpty()
-                && txt_lote.getText().isEmpty()
-                && txt_nombre.getText().isEmpty()
-                && txt_precio.getText().isEmpty() && comBox_Tipo.getSelectedItem() == null;
+               || txt_cantidad.getText().isEmpty()
+                || txt_descripcion1.getText().isEmpty()
+                || txt_lote.getText().isEmpty()
+                || txt_nombre.getText().isEmpty()
+               || txt_precio.getText().isEmpty();
     }
 
     private void cargarTiposProductos() {
-        List<TIpo_Producto> lista = Ctrl_TipoProducto.getAll();
-        for (TIpo_Producto i : lista) {
-            comBox_Tipo.addItem(i);
+
+        System.out.println(lista.get(0).getTipo());
+        for (TIpo_Producto tipo : lista) {
+            this.comBox_Tipo.addItem(tipo.getTipo());
         }
 
     }
-    PlainDocument doc = (PlainDocument) txt_nombre.getDocument();
 
 // Crear un filtro de documento para limitar la cantidad de caracteres
     static void limitarLongitudCampo(JTextField campo, int maxChars) {
@@ -256,4 +293,5 @@ registrar();
         });
 
     }
+
 }

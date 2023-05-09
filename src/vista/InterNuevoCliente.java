@@ -4,6 +4,7 @@
  */
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import com.mysql.fabric.xmlrpc.base.Data;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
@@ -14,6 +15,10 @@ import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 import modelo.Administrador;
 import modelo.Cajero;
 import modelo.Cliente;
@@ -36,6 +41,16 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
       
        // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
          cliente = new Cliente();
+             FormaterJtextField.limitarLongitudCampo(this.txt_Curp, 18);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Calle, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_CP, 5);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Nombre, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_localidad, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_num, 10);
+        FormaterJtextField.limitarLongitudCampo(this.txt_telefono, 10);
+  
        
     }
 
@@ -78,6 +93,7 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
         txt_telefono = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -244,9 +260,6 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
                         .addContainerGap()
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -257,6 +270,10 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
                                 .addComponent(jLabel11)
                                 .addGap(33, 33, 33)
                                 .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -351,15 +368,21 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
         if(campoVacio()){
-            JOptionPane.showMessageDialog(this, "Completa todos los campos");
+          
         }else{
-            recuperarDatos();
-            if(Ctrl_Cliente.Crear(cliente)){
+            
+            if(Ctrl_Persona.validarCurp(txt_Curp.getText())){
+                recuperarDatos();
+            if(Ctrl_Cliente.crear(cliente)){
                 JOptionPane.showMessageDialog(this, "Registro completado");
                 JOptionPane.showMessageDialog(this, "52"+cliente.getID(),"Codigo cliente",1);
-
+                cliente=new Cliente();
+                    limpiar( );
             }else{
-                JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+              
+            }
+             }else{
+                JOptionPane.showMessageDialog(this, "Formato de CURP invalido");
             }
         }
     }//GEN-LAST:event_jButton_GuardarActionPerformed
@@ -387,6 +410,14 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
         if(txt_apellido2.getText().isEmpty()){
             i++;
         }
+           if (Jdate_Nacimiento.getDate() == null) {
+            i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                 return true;
+            }
+        }
         if(txt_Curp.getText().isEmpty()){
             i++;
         }
@@ -409,11 +440,13 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
       if(i==0){
           return false;
       }else{
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
           return true;
       }
     }
 
     void recuperarDatos() {
+        cliente =new Cliente();
         Persona p = new Persona();
         Direccion d=new Direccion();
         p.setNombre(txt_Nombre.getText());
@@ -438,6 +471,19 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
       cliente.setRango(0);
       cliente.setPuntos(0);
        
+    }
+   void limpiar() {
+
+        txt_Nombre.setText("");
+        txt_apellido1.setText("");
+        txt_apellido2.setText("");
+        txt_Curp.setText("");
+        txt_CP.setText("");
+        txt_localidad.setText("");
+        txt_Calle.setText("");
+        txt_num.setText("");
+        cBox_estado.setSelectedIndex(0);
+        Jdate_Nacimiento.setDate(new Date());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;

@@ -4,6 +4,7 @@
  */
 package vista;
 
+import vista.Componentes.FormaterJtextField;
 import com.mysql.fabric.xmlrpc.base.Data;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
@@ -23,8 +24,8 @@ import modelo.Persona;
  *
  * @author netom
  */
-public final class InterEditarCajero extends javax.swing.JInternalFrame  {
-  
+public final class InterEditarCajero extends javax.swing.JInternalFrame {
+
     /**
      * Creates new form CrearAdmin
      */
@@ -33,12 +34,21 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
     public InterEditarCajero(String clave) {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();
-       // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
+        // p.crearDireccion(new Direccion(28, "El mante", "8990", "Jose", "404P"));
         Cajero = new Cajero();
         Cajero.setClave(clave);
-        
-        Cajero=Ctrl_Cajero.getCajer(Cajero);
+
+        Cajero = Ctrl_Cajero.get(Cajero);
         ColocarInfo(Cajero);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Curp, 18);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Calle, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_CP, 5);
+        FormaterJtextField.limitarLongitudCampo(this.txt_Nombre, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido1, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_apellido2, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_localidad, 50);
+        FormaterJtextField.limitarLongitudCampo(this.txt_num, 10);
+
     }
 
     /**
@@ -50,7 +60,6 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton_Guardar = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
@@ -79,18 +88,7 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
         jLabel10 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
+        setClosable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -319,7 +317,7 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,23 +325,14 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(467, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,17 +344,22 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-        if(campoVacio()){
-            JOptionPane.showMessageDialog(this, "Completa todos los campos");
-        }else{
-            recuperarDatos();
+        if (campoVacio()) {
 
-            if(Ctrl_Cajero.actualizarCajero(Cajero)){
-                JOptionPane.showMessageDialog(this, "Actualizado");
+        } else {
+            if (Ctrl_Persona.validarCurp(txt_Curp.getText())) {
+                recuperarDatos();
 
-            }else{
-                JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                if (Ctrl_Cajero.actualizar(Cajero)) {
+                    JOptionPane.showMessageDialog(this, "Actualizado");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un probelma");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Formato de CURP no es valido");
             }
+
         }
     }//GEN-LAST:event_jButton_GuardarActionPerformed
 
@@ -379,49 +373,57 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
         txt_localidad.setText(cajero.getPersona().getDireccion().getLocalidad());
         txt_Calle.setText(cajero.getPersona().getDireccion().getCalle());
         txt_num.setText(cajero.getPersona().getDireccion().getNumero());
-        cBox_estado.setSelectedIndex(cajero.getPersona().getDireccion().getEstado()-1733);
+        cBox_estado.setSelectedIndex(cajero.getPersona().getDireccion().getEstado() - 1733);
         Jdate_Nacimiento.setDate(cajero.getPersona().getNacimiento());
     }
 
+    boolean campoVacio() {
+        int i = 0;
 
-    boolean campoVacio(){                  
-                int i=0;                        
+        if (txt_Nombre.getText().isEmpty()) {
+            i++;
+        }
+        if (Jdate_Nacimiento.getDate() == null) {
+            i++;
+        } else {
+            if (Ctrl_Persona.esMayor(Jdate_Nacimiento.getDate()) == false) {
+                JOptionPane.showMessageDialog(this, "Debes ser mayor de edad para ser administrador", "Solo mayor de 18", JOptionPane.WARNING_MESSAGE);
+                  return true;
+            }
+        }
+        if (txt_apellido1.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_apellido2.getText().isEmpty()) {
+            i++;
+        }
+        if (txt_Curp.getText().isEmpty()) {
+            i++;
+        }
 
-        if(txt_Nombre.getText().isEmpty()){
+        if (txt_CP.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido1.getText().isEmpty()){
+        if (txt_localidad.getText().isEmpty()) {
             i++;
         }
-        if(txt_apellido2.getText().isEmpty()){
+        if (txt_Calle.getText().isEmpty()) {
             i++;
         }
-        if(txt_Curp.getText().isEmpty()){
+        if (txt_num.getText().isEmpty()) {
             i++;
         }
-
-        if(txt_CP.getText().isEmpty()){
-            i++;
+        if (i == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos");
+            return true;
         }
-        if(txt_localidad.getText().isEmpty()){
-            i++;
-        }
-        if(txt_Calle.getText().isEmpty()){
-            i++;
-        }
-        if(txt_num.getText().isEmpty()){
-            i++;
-        }
-      if(i==0){
-          return false;
-      }else{
-          return true;
-      }
     }
 
     void recuperarDatos() {
         Persona p = new Persona();
-        Direccion d=new Direccion();
+        Direccion d = new Direccion();
         p.setID(Cajero.getPersona().getID());
         p.setNombre(txt_Nombre.getText());
         p.setApellidoP(txt_apellido1.getText());
@@ -432,15 +434,15 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
         date.setTime(System.currentTimeMillis());
         System.out.println(date.toString());
         p.setFechaRegistro(date);
-       d.setID(Cajero.getPersona().getDireccion().getID());
-       d.setEstado(cBox_estado.getSelectedIndex()+1733);
-       d.setCP(txt_CP.getText());
-       d.setLocalidad(txt_localidad.getText());
-       d.setCalle(txt_Calle.getText());
-       d.setNumero(txt_num.getText());
+        d.setID(Cajero.getPersona().getDireccion().getID());
+        d.setEstado(cBox_estado.getSelectedIndex() + 1733);
+        d.setCP(txt_CP.getText());
+        d.setLocalidad(txt_localidad.getText());
+        d.setCalle(txt_Calle.getText());
+        d.setNumero(txt_num.getText());
         p.setDireccion(d);
-       Cajero.setPersona(p);
-       
+        Cajero.setPersona(p);
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate_Nacimiento;
@@ -459,7 +461,6 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame  {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField txt_CP;
