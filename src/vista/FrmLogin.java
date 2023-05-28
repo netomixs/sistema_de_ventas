@@ -12,11 +12,14 @@ import modelo.Administrador;
 import modelo.Usuario;
 
 /**
- *
- * @author Edison Zambrano - © Programador Fantama
+ *Formulario para el inicio de sesion de administrador
+ * @author Ernesto
  */
 public class FrmLogin extends javax.swing.JFrame {
        
+    /**
+     *
+     */
     public FrmLogin() {
         initComponents();
         this.setResizable(false);
@@ -28,6 +31,10 @@ public class FrmLogin extends javax.swing.JFrame {
        
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("/Recursos/img/LogoSalesWear-3@0,25x.png"));

@@ -1,7 +1,5 @@
 package controlador;
 
-import Interfaces.Crud;
-import conexion.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;

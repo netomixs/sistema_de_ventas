@@ -28,6 +28,10 @@ import modelo.ProductosVendidos;
 import modelo.RangoCliente;
 import static vista.InterGestionarCajeros.jTable_Cajeros;
 
+/**
+ *Ventana de facturacion o de ventas
+ * @author Ernesto
+ */
 public class InterFacturacion extends javax.swing.JInternalFrame {
 
     float total;
@@ -41,6 +45,9 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     List<Producto> listaProductos;
     private float iva;
 
+    /**
+     *
+     */
     public InterFacturacion() {
         initComponents();
         this.setSize(new Dimension(800, 600));
@@ -495,7 +502,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
                         idCliente = cliente.getID() + "";
                     }
                     Ctrl_RegistrarVenta.generarTicket(id, getTabla(), total, subtotal, descuento, iva, idCliente);
-                    JOptionPane.showMessageDialog(this, "<html><h1>Cambio</n><font size='14'> $" + cambio + "</font></html>", "Comprá finalizada", 1);
+                    JOptionPane.showMessageDialog(this, "<html><h1>Cambio</n><font size='14'> $" + (Math.round(cambio*100.0)/100.0 )+ "</font></html>", "Comprá finalizada", 1);
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -573,6 +580,10 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         this.jTable_productos.setModel(getTabla());
     }
 
+    /**
+     *
+     * @return
+     */
     public DefaultTableModel getTabla() {
         DefaultTableModel model = new DefaultTableModel();
 
@@ -601,6 +612,11 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         return model;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     */
     public int buscarEnLista(Producto p) {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getProdcuto() == p.getID()) {

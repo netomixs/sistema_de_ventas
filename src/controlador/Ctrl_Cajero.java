@@ -4,7 +4,6 @@
  */
 package controlador;
 
-import conexion.Conexion;
 import java.security.SecureRandom;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -45,7 +44,7 @@ public class Ctrl_Cajero {
                 return relacionPersonaCajero(cajero);
             }
         } catch (SQLException e) {
-            System.out.println("Error al crear usuario333: " + e);
+            System.out.println("Error al crear usuario3: " + e);
             eliminar(cajero);
             return false;
         }
@@ -103,10 +102,9 @@ public class Ctrl_Cajero {
         Ctrl_Persona p = new Ctrl_Persona();
         try {
             p.Actualizar(cajero.getPersona());
-            return false;
+            return true;
         } catch (Exception e) {
             System.out.println("Error: " + e);
-
             return false;
         }
         

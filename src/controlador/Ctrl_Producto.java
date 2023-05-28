@@ -1,6 +1,5 @@
 package controlador;
 
-import conexion.Conexion;
 import static controlador.Ctrl_Cliente.get;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -386,7 +385,6 @@ public class Ctrl_Producto {
         long diasDesde = (long) Math.floor(startTime / (1000 * 60 * 60 * 24)); // convertimos a dias, para que no afecten cambios de hora 
         long diasHasta = (long) Math.floor(endTime / (1000 * 60 * 60 * 24)); // convertimos a dias, para que no afecten cambios de hora
         long dias = diasHasta - diasDesde;
-
         return dias;
     }
 

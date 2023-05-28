@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
 import controlador.Ctrl_Cliente;
@@ -26,8 +26,9 @@ import modelo.Cajero;
 import modelo.Cliente;
 
 /**
- *
- * @author ediso
+ *Formulario para visualizar cajeros
+ * Y seleccionar cajeros para la eliminacion y la modificacion
+ * @author Ernesto
  */
 public class InterGestionarCajeros extends javax.swing.JInternalFrame {
 
@@ -37,6 +38,10 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
     List<Cajero> listaClientes;
     JDesktopPane desk;
 
+    /**
+     *
+     * @param desk
+     */
     public InterGestionarCajeros(JDesktopPane desk) {
         this.desk = desk;
         initComponents();
@@ -259,6 +264,12 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
     public static javax.swing.JTable jTable_Cajeros;
     private javax.swing.JTextField label_busqueda;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     *
+     * @param valorBusqueda
+     * @param tabla
+     */
 public void buscarEnJTable(String valorBusqueda, JTable tabla) {
     DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
     TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(modelo);

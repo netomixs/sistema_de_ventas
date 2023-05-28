@@ -1,6 +1,5 @@
 package controlador;
 
-import conexion.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -335,10 +334,16 @@ public class Ctrl_Cliente {
         }
         return model;
     }
+
+    /**
+     *Calcula el descuento dependiendo del rango indicado
+     * @param rango
+     * @param total
+     * @return
+     */
     public  static float descuentoPorRango(int rango,float total){
         float descuento=0;
         switch (rango) {
-
                  case 1:
                 descuento=.05f;
                 break;

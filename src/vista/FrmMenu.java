@@ -8,14 +8,21 @@ import javax.swing.JDesktopPane;
 import modelo.Administrador;
 
 /**
- *
- * @author Edison Zambrano - © Programador Fantama
+ * Ventana principal
+ * Menu de administrador
+ * @author Ernesto
  */
 public class FrmMenu extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static JDesktopPane jDesktopPane_menu;
     Administrador admin;
 
+    /**
+     *
+     */
     public FrmMenu() {
         initComponents();
         this.setSize(new Dimension(1200, 700));
@@ -504,10 +511,18 @@ public class FrmMenu extends javax.swing.JFrame {
         });
     }
 
+    /**
+     *
+     * @return
+     */
     public Administrador getAdmin() {
         return admin;
     }
 
+    /**
+     *
+     * @param admin
+     */
     public void setAdmin(Administrador admin) {
         this.admin = admin;
         System.out.println(admin.getUsuario());

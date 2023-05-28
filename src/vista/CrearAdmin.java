@@ -19,7 +19,7 @@ import modelo.Direccion;
 import modelo.Persona;
 
 /**
- *
+ *Formulario para el registro de un nuevo cliente
  * @author netom
  */
 public class CrearAdmin extends javax.swing.JFrame {
@@ -61,6 +61,9 @@ public class CrearAdmin extends javax.swing.JFrame {
      */
     Administrador admin;
 
+    /**
+     *
+     */
     public CrearAdmin() {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();

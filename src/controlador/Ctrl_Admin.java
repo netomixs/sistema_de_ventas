@@ -4,7 +4,6 @@
  */
 package controlador;
 
-import conexion.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import javax.swing.JOptionPane;
 import modelo.Administrador;
 import modelo.Direccion;
 import modelo.Persona;
-import org.junit.Test;
 
 /**
  *
@@ -213,6 +211,12 @@ public class Ctrl_Admin {
         return null;
     }
 
+    /**
+     *Eliminar al administrador indicado por ID
+     * Se debe de proporcionar ID persona y direccion en el objeto
+     * 
+     * @param admin
+     */
     public static void eliminarAdministrador(Administrador admin) {
         // Pedir la confirmación de eliminación de cuenta al usuario
         int confirmacion1 = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar su cuenta?");

@@ -4,7 +4,6 @@
  */
 package controlador;
 
-import conexion.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -198,14 +197,18 @@ public class Ctrl_Correo {
         }
     }
 
+    /**
+     *Actualiz el correo del cliente indicado
+     * @param id
+     */
     public static void actualizarORegistrarCorreo(int id) {
         // Comprobar si el correo ya existe
         String correo = Consultar(id);
         String mensaje;
         boolean correoExiste = false; // Variable temporal, deberías reemplazar esto con tu lógica real
         if (!correo.isEmpty()) {
-            mensaje = "Actualizar correo actual:";
-            correo = JOptionPane.showInputDialog(null, mensaje, "Correo actual" + correo, 1);
+            mensaje = "Actualizar correo actual: ";
+            correo = JOptionPane.showInputDialog(null, mensaje, "Correo actual " + correo, 1);
             if(correo!=null   ){
                 if(!correo.isEmpty()){
                      Actualizar(id, correo); 
@@ -215,9 +218,9 @@ public class Ctrl_Correo {
             
 
         } else {
-            mensaje = "Por favor, registre su correo electrónico:";
-            correo = JOptionPane.showInputDialog(null, mensaje, "Agregar nuevo correo", 1);
-             if(correo!=null || (!correo.isEmpty())){
+            mensaje = "Por favor, registre su correo electrónico: ";
+            correo = JOptionPane.showInputDialog(null, mensaje, "Agregar nuevo correo ", 1);
+             if(correo!=null ){
                  if(!correo.isEmpty()){
                  Crear(id, correo);}
                  

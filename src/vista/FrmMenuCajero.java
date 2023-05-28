@@ -14,14 +14,22 @@ import modelo.Cliente;
 import modelo.RangoCliente;
 
 /**
- *
- * @author Edison Zambrano - © Programador Fantama
+ * Ventana principal
+ * Menu de cajero
+ * @author Ernesto
  */
 public class FrmMenuCajero extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static JDesktopPane jDesktopPane_menu;
     Cajero cajero;
 
+    /**
+     *
+     * @param cajero
+     */
     public FrmMenuCajero(Cajero cajero) {
         initComponents();
         this.setSize(new Dimension(1200, 700));
@@ -178,6 +186,10 @@ public class FrmMenuCajero extends javax.swing.JFrame {
     private void jMenuItem_nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nueva_ventaActionPerformed
         abrirVentas();
     }//GEN-LAST:event_jMenuItem_nueva_ventaActionPerformed
+
+    /**
+     *
+     */
     public static void abrirVentas() {
         InterFacturacion interFacturacion = new InterFacturacion();
         jDesktopPane_menu.add(interFacturacion);
@@ -272,6 +284,10 @@ JOptionPane.showMessageDialog(
     private javax.swing.JMenuItem jMenuItem_nuevo_cliente;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

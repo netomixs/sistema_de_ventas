@@ -3,27 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_ProductoTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_RangoCliente.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_RegistrarVentaTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_CajeroTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_RangoClienteTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_LoteTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_ClienteTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_RegistrarVenta.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/VentaPDF.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/VentaPDFTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/modelo/Factura.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Factura.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_TipoProducto.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Producto.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_PersonaTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Correo.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/controlador/Ctrl_FacturaTest.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/modelo/Lote.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Cliente.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/modelo/TIpo_Producto.java</file>
-            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Reportes.java</file>
+            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Persona.java</file>
+            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/test/PruebasCajas/Girs.java</file>
+            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Conexion.java</file>
+            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Ctrl_Admin.java</file>
+            <file>file:/C:/Users/netom/Documents/NetBeansProjects/SistemaDeventas1/src/controlador/Crud.java</file>
         </group>
     </open-files>
 </project-private>

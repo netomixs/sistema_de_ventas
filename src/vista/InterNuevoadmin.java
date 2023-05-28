@@ -14,7 +14,7 @@ import modelo.Direccion;
 import modelo.Persona;
 
 /**
- *
+ * Formulario para el registro de un nuevo administrador
  * @author netom
  */
 public class InterNuevoadmin extends javax.swing.JInternalFrame {
@@ -24,6 +24,9 @@ public class InterNuevoadmin extends javax.swing.JInternalFrame {
      */
     Administrador admin;
 
+    /**
+     *
+     */
     public InterNuevoadmin() {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();

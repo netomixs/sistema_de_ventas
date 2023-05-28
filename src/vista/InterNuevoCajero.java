@@ -21,7 +21,7 @@ import modelo.Direccion;
 import modelo.Persona;
 
 /**
- *
+ * Formulario para el registro de un nuevo cajero
  * @author netom
  */
 public class InterNuevoCajero extends javax.swing.JInternalFrame {
@@ -31,6 +31,9 @@ public class InterNuevoCajero extends javax.swing.JInternalFrame {
      */
     Cajero Cajero;
 
+    /**
+     *
+     */
     public InterNuevoCajero() {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();

@@ -12,7 +12,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import conexion.Conexion;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +23,6 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JTable;
-import sun.jvm.hotspot.opto.Phase;
 import vista.InterFacturacion;
 
 /**

@@ -1,6 +1,6 @@
 package vista;
 
-import Interfaces.VistaFormInterfaz;
+import vista.Componentes.VistaFormInterfaz;
 import controlador.Ctrl_Lote;
 import controlador.Ctrl_Producto;
 import java.awt.Dimension;
@@ -17,10 +17,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import modelo.Lote;
-
 /**
- *
- * @author ediso
+ * Formulario para visualizar lotes
+ * Y seleccionar lotes para la eliminacion y la modificacion
+ * @author Ernesto
+ * 
  */
 public class InterGestionarLotes extends javax.swing.JInternalFrame implements VistaFormInterfaz<Lote> {
 
@@ -30,6 +31,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
     Lote lote;
     int indexSeleccioado;
 
+    /**
+     *
+     */
     public InterGestionarLotes() {
         initComponents();
         this.setSize(new Dimension(940, 500));
@@ -222,6 +226,12 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
      * *****************************************************
      */
 // Crear un filtro de documento para limitar la cantidad de caracteres
+
+    /**
+     *
+     * @param campo
+     * @param maxChars
+     */
     @Override
     public void limitarLongitudCampo(JTextField campo, int maxChars) {
         PlainDocument doc = (PlainDocument) campo.getDocument();
@@ -242,6 +252,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         });
     }
 
+    /**
+     *
+     */
     @Override
     public void cargarTabla() {
 
@@ -251,6 +264,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         addEventoTabla(jTable_Lote);
     }
 
+    /**
+     *
+     */
     @Override
     public void actualizarTabla() {
         Ctrl_Lote ctrlLote = new Ctrl_Lote();
@@ -259,6 +275,10 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         addEventoTabla(jTable_Lote);
     }
 
+    /**
+     *
+     * @param tabla
+     */
     @Override
     public void addEventoTabla(JTable tabla) {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
@@ -274,6 +294,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         });
     }
 
+    /**
+     *
+     */
     @Override
     public void recupararIndexDeTabla() {
 
@@ -281,12 +304,17 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         if (indexSeleccioado >= 0) {
             String columna0 = jTable_Lote.getValueAt(indexSeleccioado, 0).toString();
             int ID = Integer.parseInt(columna0);
+            lote = new Lote();
             lote = ctrlLote.get(ID);
             llenarCampos(lote);
         }
 
     }
 
+    /**
+     *
+     * @param lote
+     */
     @Override
     public void llenarCampos(Lote lote) {
         this.jDate_Llegada.setDate(lote.getFechaLLegada());
@@ -294,6 +322,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         this.txt_Serie.setText(lote.getSerie());
     }
 
+    /**
+     *
+     */
     @Override
     public void activarBoton() {
         if (indexSeleccioado >= 0) {
@@ -305,6 +336,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void bloquerCampos() {
         this.jDate_Llegada.setEnabled(false);
@@ -312,6 +346,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         this.txt_Serie.setEnabled(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void desBloquerCampos() {
         this.jDate_Llegada.setEnabled(true);
@@ -319,16 +356,23 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         this.txt_Serie.setEnabled(true);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean camposVacios() {
         return jDate_Llegada.getDate() == null || jDate_Retiro.getDate() == null || txt_Serie.getText().isEmpty();
     }
 
+    /**
+     *
+     */
     @Override
     public void recuperarCampos() {
         // Crear objeto de la clase Lote
-        lote = new Lote();
-
+        
+       
         // Obtener fecha de llegada
         Date fechaLlegada = jDate_Llegada.getDate();
         lote.setFechaLLegada(fechaLlegada);
@@ -354,6 +398,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void actualizar() {
 
@@ -375,6 +422,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void eliminar() {
 
@@ -386,6 +436,9 @@ public class InterGestionarLotes extends javax.swing.JInternalFrame implements V
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void limpiarCampos() {
         jDate_Llegada.setDate(null);

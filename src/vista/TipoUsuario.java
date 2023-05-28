@@ -9,8 +9,15 @@ import controlador.Ctrl_Admin;
 import java.awt.Color;
 import javax.swing.*;
 
+/**
+ *Seleccion de tipo de usuario
+ * @author netom
+ */
 public class TipoUsuario extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public TipoUsuario() {
         initComponents();
         this.setBounds(500, 200, this.getSize().width, this.getSize().height);
@@ -101,6 +108,7 @@ public class TipoUsuario extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws javax.swing.UnsupportedLookAndFeelException
      */
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         /* Set the Nimbus look and feel */

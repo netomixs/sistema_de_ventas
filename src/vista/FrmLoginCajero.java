@@ -14,11 +14,14 @@ import modelo.Cajero;
 import modelo.Usuario;
 
 /**
- *
- * @author Edison Zambrano - © Programador Fantama
+ * Formulario de inicio de sesion de cajero
+ * @author Ernesto
  */
 public class FrmLoginCajero extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public FrmLoginCajero() {
         initComponents();
         this.setResizable(false);
@@ -28,6 +31,10 @@ public class FrmLoginCajero extends javax.swing.JFrame {
         FormaterJtextField.limitarLongitudCampo(txt_usuario,8);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/ventas.png"));

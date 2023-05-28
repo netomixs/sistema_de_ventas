@@ -21,8 +21,8 @@ import modelo.Direccion;
 import modelo.Persona;
 
 /**
- *
- * @author netom
+ *Formulario para modificar datos de Cajero
+ * @author Ernesto
  */
 public final class InterEditarCajero extends javax.swing.JInternalFrame {
 
@@ -31,6 +31,10 @@ public final class InterEditarCajero extends javax.swing.JInternalFrame {
      */
     Cajero Cajero;
 
+    /**
+     *
+     * @param clave
+     */
     public InterEditarCajero(String clave) {
         initComponents();
         Ctrl_Persona p = new Ctrl_Persona();

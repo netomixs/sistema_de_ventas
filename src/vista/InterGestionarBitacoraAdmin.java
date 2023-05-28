@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import controlador.Bitacora;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
@@ -28,8 +28,8 @@ import modelo.Cajero;
 import modelo.Cliente;
 
 /**
- *
- * @author ediso
+ *Consulta de bitacora de administradores
+ * @author Ernesto
  */
 public class InterGestionarBitacoraAdmin extends javax.swing.JInternalFrame {
 
@@ -39,6 +39,9 @@ public class InterGestionarBitacoraAdmin extends javax.swing.JInternalFrame {
     List<Cliente> listaClientes;
     JDesktopPane desk;
 
+    /**
+     *
+     */
     public InterGestionarBitacoraAdmin() {
         this.desk = desk;
         initComponents();

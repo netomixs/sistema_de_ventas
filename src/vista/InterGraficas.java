@@ -6,13 +6,24 @@ import static vista.FrmMenu.jDesktopPane_menu;
 
 
 /**
- *
+ *@deprecated 
  * @author edison Zambrano
  */
 public class InterGraficas extends javax.swing.JInternalFrame {
     
-    public static String fecha_inicio = "", fecha_fin = "";
+    /**
+     *
+     */
+    public static String fecha_inicio = "",
 
+    /**
+     *
+     */
+    fecha_fin = "";
+
+    /**
+     *
+     */
     public InterGraficas() {
         initComponents();
         this.setSize(new Dimension(450, 300));

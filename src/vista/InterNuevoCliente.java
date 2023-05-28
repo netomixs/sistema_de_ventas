@@ -26,7 +26,7 @@ import modelo.Direccion;
 import modelo.Persona;
 
 /**
- *
+ * Formulario para el registro de un nuevo clientes
  * @author netom
  */
 public class InterNuevoCliente extends javax.swing.JInternalFrame  {
@@ -36,6 +36,9 @@ public class InterNuevoCliente extends javax.swing.JInternalFrame  {
      */
     Cliente cliente;
 
+    /**
+     *
+     */
     public InterNuevoCliente() {
         initComponents();
       

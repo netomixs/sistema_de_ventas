@@ -1,6 +1,6 @@
 package vista;
 
-import Interfaces.VistaFormInterfaz;
+import vista.Componentes.VistaFormInterfaz;
 import vista.Componentes.DoublePositivoDocumentFilter;
 import vista.Componentes.EnteroPositivoDocumentFilter;
 import controlador.Ctrl_Lote;
@@ -26,8 +26,10 @@ import modelo.Producto;
 import modelo.TIpo_Producto;
 
 /**
- *
- * @author ediso
+ * Formulario para visualizar productos
+ * Y seleccionar productos para la eliminacion y la modificacion
+ * @author Ernesto
+ * 
  */
 public class InterGestionarProducto extends javax.swing.JInternalFrame implements VistaFormInterfaz<Producto> {
     Ctrl_Producto ctrlProductos=new Ctrl_Producto();
@@ -38,6 +40,9 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame implement
     int indexSeleccioado;
     List<TIpo_Producto> lista;
 
+    /**
+     *
+     */
     public InterGestionarProducto() {
         initComponents();
         this.setSize(new Dimension(940, 500));
@@ -270,6 +275,10 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame implement
         actualizarTabla();
     }//GEN-LAST:event_jButton2ActionPerformed
  
+    /**
+     *
+     * @param e
+     */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         boolean ctrlPressed = e.isControlDown();
@@ -403,6 +412,9 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame implement
                  || txt_precio.getText().isEmpty() || comBox_Tipo.getSelectedItem() == null;
     }
 
+    /**
+     *
+     */
     public void cargarTiposProductos() {
 
         for (TIpo_Producto tipo : lista) {

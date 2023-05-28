@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cajero;
 import controlador.Ctrl_Cliente;
@@ -27,8 +27,10 @@ import modelo.Cajero;
 import modelo.Cliente;
 
 /**
- *
- * @author ediso
+ * Formulario para visualizar clientes
+ * Y seleccionar clientes para la eliminacion y la modificacion
+ * @author Ernesto
+ * 
  */
 public class InterGestionarClientes extends javax.swing.JInternalFrame {
 
@@ -38,6 +40,10 @@ public class InterGestionarClientes extends javax.swing.JInternalFrame {
     List<Cliente> listaClientes;
     JDesktopPane desk;
    
+    /**
+     *
+     * @param desk
+     */
     public InterGestionarClientes(JDesktopPane desk) {
         this.desk = desk;
         initComponents();

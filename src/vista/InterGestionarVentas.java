@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import controlador.Ctrl_Factura;
 import controlador.Ctrl_Producto;
 import controlador.Ctrl_RegistrarVenta;
@@ -24,14 +24,18 @@ import modelo.CabeceraVenta;
 import static vista.InterGestionarProducto.jTable_productos;
 
 /**
- *
- * @author ediso
+ *  visualizar ventas
+ * @author Ernesto
+ * 
  */
 public class InterGestionarVentas extends javax.swing.JInternalFrame {
 
     private int idCliente = 0;
     private int idVenta;
 
+    /**
+     *
+     */
     public InterGestionarVentas() {
         initComponents();
         this.setSize(new Dimension(900, 500));

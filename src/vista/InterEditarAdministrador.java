@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import controlador.Ctrl_Admin;
 import controlador.Ctrl_Cliente;
 import controlador.Ctrl_Persona;
@@ -26,8 +26,8 @@ import modelo.Persona;
 import modelo.Usuario;
 
 /**
- *
- * @author ediso
+ *Formulario para modificar datos de administrador
+ * @author Ernesto
  */
 public class InterEditarAdministrador extends javax.swing.JInternalFrame {
 
@@ -35,6 +35,10 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
     private Administrador admin;
     private Administrador adminAux;
 
+    /**
+     *
+     * @param admin
+     */
     public InterEditarAdministrador(Administrador admin) {
         initComponents();
         //this.setSize(new Dimension(700, 650));
@@ -409,10 +413,18 @@ public class InterEditarAdministrador extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Administrador getAdmin() {
         return admin;
     }
 
+    /**
+     *
+     * @param admin
+     */
     public void setAdmin(Administrador admin) {
         this.admin = admin;
     }

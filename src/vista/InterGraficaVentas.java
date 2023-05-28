@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import controlador.Conexion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
+ *@deprecated 
  * @author Edison
  */
 public class InterGraficaVentas extends javax.swing.JInternalFrame {
@@ -23,6 +23,10 @@ public class InterGraficaVentas extends javax.swing.JInternalFrame {
     int[] vector_estatus_cantidad;
 
     //Constructor
+
+    /**
+     *
+     */
     public InterGraficaVentas() {
         initComponents();
         this.setSize(new Dimension(550, 650));
@@ -78,6 +82,12 @@ public class InterGraficaVentas extends javax.swing.JInternalFrame {
     }
 
     //Metodo para dterminar cual es el dia de mahyor cantidad de ventas
+
+    /**
+     *
+     * @param listaCantidad
+     * @return
+     */
     public int MetodoMayorVenta(ArrayList<Integer> listaCantidad) {
         int mayor = 0;
         for (int i = 0; i < listaCantidad.size(); i++) {
@@ -118,6 +128,11 @@ public class InterGraficaVentas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     //metodo que dibuja graficas
+
+    /**
+     *
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);

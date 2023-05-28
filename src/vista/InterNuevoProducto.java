@@ -22,14 +22,17 @@ import modelo.Producto;
 import modelo.TIpo_Producto;
 
 /**
- *
- * @author ediso
+ * Formulario para el registro de un nuevo productos
+ * @author netom
  */
 public class InterNuevoProducto extends javax.swing.JInternalFrame {
 
     Producto producto;
     List<TIpo_Producto> lista;
 
+    /**
+     *
+     */
     public InterNuevoProducto() {
         PlainDocument doc;
         lista = Ctrl_TipoProducto.getAll();
@@ -255,6 +258,10 @@ public class InterNuevoProducto extends javax.swing.JInternalFrame {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean camposVacios() {
         return txt_Barra.getText().isEmpty()
                || txt_cantidad.getText().isEmpty()

@@ -12,11 +12,14 @@ import javax.swing.text.PlainDocument;
 import modelo.Lote;
 
 /**
- *
- * @author ediso
+ * Formulario para el registro de un nuevo lotes
+ * @author netom
  */
 public class InterNuevoLote extends javax.swing.JInternalFrame {
 
+    /**
+     *
+     */
     public InterNuevoLote() {
         initComponents();
         setTitle("Actualizar Stock de los Productos");
@@ -100,6 +103,10 @@ public class InterNuevoLote extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_Serie;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @return
+     */
     public boolean camposVacios() {
         return jDate_Llegada.getDate() == null || jDate_Salida.getDate() == null || txt_Serie.getText().isEmpty();
     }

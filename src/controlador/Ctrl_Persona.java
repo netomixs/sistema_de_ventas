@@ -4,7 +4,6 @@
  */
 package controlador;
 
-import conexion.Conexion;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.CallableStatement;
@@ -250,6 +249,11 @@ public class Ctrl_Persona {
 
     }
 
+    /**
+     *Retorna True si la fecha indicada es mayor a 18 años
+     * @param fechaNacimiento
+     * @return
+     */
     public static boolean esMayor(Date fechaNacimiento) {
         Date fechaActual = new Date();
         long edadMilisegundos = fechaActual.getTime() - fechaNacimiento.getTime();

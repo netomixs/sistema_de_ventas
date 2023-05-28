@@ -15,10 +15,22 @@ import javax.swing.text.DocumentFilter;
 public class DoublePositivoDocumentFilter extends DocumentFilter {
     private int limite;
 
+    /**
+     *
+     * @param limite
+     */
     public DoublePositivoDocumentFilter(int limite) {
         this.limite = limite;
     }
 
+    /**
+     *
+     * @param fb
+     * @param offset
+     * @param text
+     * @param attrs
+     * @throws BadLocationException
+     */
     @Override
     public void insertString(FilterBypass fb, int offset, String text,
             AttributeSet attrs) throws BadLocationException {
@@ -28,6 +40,15 @@ public class DoublePositivoDocumentFilter extends DocumentFilter {
         }
     }
 
+    /**
+     *
+     * @param fb
+     * @param offset
+     * @param length
+     * @param text
+     * @param attrs
+     * @throws BadLocationException
+     */
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text,
             AttributeSet attrs) throws BadLocationException {

@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.TIpo_Producto;
 
 /**
- *
+ *@deprecated 
  * @author ediso
  */
 public class InterNuevaCategoria extends javax.swing.JInternalFrame {
@@ -20,6 +20,9 @@ public class InterNuevaCategoria extends javax.swing.JInternalFrame {
     TIpo_Producto tipo;
     private int indexSeleccioado,idSeleccionado;
 
+    /**
+     *
+     */
     public InterNuevaCategoria() {
         initComponents();
         actualizarTabla();
@@ -219,6 +222,11 @@ public class InterNuevaCategoria extends javax.swing.JInternalFrame {
     public static javax.swing.JTable jTable_productos;
     private javax.swing.JTextField txt_descripcion;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     *
+     * @return
+     */
      public boolean camposVacios() {
         return txt_descripcion.getText().isEmpty();
     }

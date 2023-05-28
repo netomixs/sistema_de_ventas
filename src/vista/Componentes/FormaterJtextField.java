@@ -16,7 +16,13 @@ import javax.swing.text.PlainDocument;
  * @author netom
  */
 public class FormaterJtextField {
-        public static void limitarLongitudCampo(JTextField campo, int maxChars) {
+
+    /**
+     *
+     * @param campo
+     * @param maxChars
+     */
+    public static void limitarLongitudCampo(JTextField campo, int maxChars) {
         PlainDocument doc = (PlainDocument) campo.getDocument();
         doc.setDocumentFilter(new DocumentFilter() {
             @Override
@@ -34,7 +40,13 @@ public class FormaterJtextField {
             }
         });
     }
-        public static boolean validarCurp(String curp) {
+
+    /**
+     *
+     * @param curp
+     * @return
+     */
+    public static boolean validarCurp(String curp) {
     String regex = "[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[0-9]{2}";
 
     if (curp == null || !curp.matches(regex)) {
