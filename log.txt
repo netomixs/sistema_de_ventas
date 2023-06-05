@@ -1,0 +1,18 @@
+Imagen copiada exitosamente.
+fhubdisjokm137
+-1
+java.lang.NullPointerException: Cannot invoke "modelo.Cliente.getID()" because "this.cliente" is null
+8
+fhubdisjokm96
+8
+fhubdisjokm96
+2023-11-19
+2023-11-19
+2023-05-31
+dIAS172
+des0.0
+2023-11-19
+2023-11-19
+2023-05-31
+dIAS172
+des0.0

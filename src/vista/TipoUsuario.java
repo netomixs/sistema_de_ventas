@@ -7,6 +7,14 @@ package vista;
 import com.formdev.flatlaf.FlatLightLaf;
 import controlador.Ctrl_Admin;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -21,6 +29,15 @@ public class TipoUsuario extends javax.swing.JFrame {
     public TipoUsuario() {
         initComponents();
         this.setBounds(500, 200, this.getSize().width, this.getSize().height);
+        
+        PrintStream out;
+        try {
+            out = new PrintStream(new FileOutputStream("log.txt"));
+                System.setOut(out);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    copiarImagenAdirectorio();
     }
 
     @SuppressWarnings("unchecked")
@@ -158,7 +175,35 @@ public class TipoUsuario extends javax.swing.JFrame {
             }
         });
     }
+void copiarImagenAdirectorio(){
+     String sourcePath = "src/Recursos/img/LogoSalesWear.png";  // Ruta de la imagen de origen
+        String destinationPath =System.getProperty("user.dir") + "/LogoSalesWear.png";  // Ruta de la imagen de destino
 
+        try {
+            // Crear flujo de entrada para leer la imagen de origen
+            FileInputStream fis = new FileInputStream(new File(sourcePath));
+
+            // Crear flujo de salida para escribir la imagen de destino
+            FileOutputStream fos = new FileOutputStream(new File(destinationPath));
+
+            // Leer y escribir los bytes de la imagen
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+
+            // Cerrar los flujos de entrada y salida
+            fis.close();
+            fos.close();
+
+            System.out.println("Imagen copiada exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+    
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

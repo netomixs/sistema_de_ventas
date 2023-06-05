@@ -202,7 +202,7 @@ public class InterGestionarCajeros extends javax.swing.JInternalFrame {
          if (op == 0) {
             //Si
             Cajero cajero = new Cajero();
-                String clave = jTable_Cajeros.getModel().getValueAt(indexSelecionado, 3).toString();
+                String clave = jTable_Cajeros.getValueAt(indexSelecionado, 3).toString();
                 cajero.setClave(clave);
                 System.out.println(clave);
                 cajero = Ctrl_Cajero.get(cajero);

@@ -320,7 +320,31 @@ public class Ctrl_Producto {
 
         return model;
     }
+    public DefaultTableModel getTablaCajero() {
+        Ctrl_Lote ctrlLote = new Ctrl_Lote();
+        DefaultTableModel model = new DefaultTableModel();
+        List<Producto> lista = getAll();
+        String fila[] = new String[6];
+        model.addColumn("Id");
+        model.addColumn("Nombre");
+        model.addColumn("En stock");
+        model.addColumn("Precio");
+        model.addColumn("Tipo");
+        model.addColumn("Codigo");
 
+        for (Producto i : lista) {
+            fila[0] = i.getID() + "";
+            fila[1] = i.getNombre();
+            fila[2] = i.getStock() + "";
+            fila[3] = i.getPrecio() + "";
+            fila[4] = Ctrl_TipoProducto.getTipo(i.getTipo()).getTipo();
+            fila[5] = i.getC_Barras();
+
+            model.addRow(fila);
+        }
+
+        return model;
+    }
     /**
      * Retorna el descuento que se le hace a un prodcuto basado en su fecha de
      * retiro

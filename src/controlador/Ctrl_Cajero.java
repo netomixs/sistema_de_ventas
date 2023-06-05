@@ -23,10 +23,12 @@ import modelo.Persona;
  * @author netom
  */
 public class Ctrl_Cajero {
-     /**
-     *Registra un cajero en la base de datos
+
+    /**
+     * Registra un cajero en la base de datos
+     *
      * @param cajero
-     * @return 
+     * @return
      */
     public static final boolean crear(Cajero cajero) {
         Ctrl_Persona p = new Ctrl_Persona();
@@ -41,8 +43,10 @@ public class Ctrl_Cajero {
             ResultSet rs = consulta.getResultSet();
             if (rs.next()) {
                 cajero.setID(Integer.parseInt(rs.getString(1)));
+                cn.close();
                 return relacionPersonaCajero(cajero);
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al crear usuario3: " + e);
             eliminar(cajero);
@@ -50,10 +54,11 @@ public class Ctrl_Cajero {
         }
         return false;
     }
-  /**
+
+    /**
      *
-     * crear la relacion entre cajero y persona
-     * false si ocurrio algun error
+     * crear la relacion entre cajero y persona false si ocurrio algun error
+     *
      * @param cajero
      * @return
      */
@@ -67,17 +72,21 @@ public class Ctrl_Cajero {
             consulta.setInt(2, cajero.getID());
             System.out.println(cajero.getPersona().getID() + " " + cajero.getID());
             if (consulta.executeUpdate() > 0) {
+                cn.close();
                 return true;
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al crear relacion: " + e);
             eliminar(cajero);
         }
         return false;
     }
-   /**
-     *Eliminar al cajero indicado en la base de datos
-     * @param cajero 
+
+    /**
+     * Eliminar al cajero indicado en la base de datos
+     *
+     * @param cajero
      */
     public static void eliminar(Cajero cajero) {
         Connection cn = Conexion.conectar();
@@ -93,27 +102,32 @@ public class Ctrl_Cajero {
 
         }
     }
-       /**
-     *Actualiza los datos del cajero indicado
+
+    /**
+     * Actualiza los datos del cajero indicado
+     *
      * @param cajero
-     * @return 
+     * @return
      */
     public static boolean actualizar(Cajero cajero) {
         Ctrl_Persona p = new Ctrl_Persona();
         try {
             p.Actualizar(cajero.getPersona());
+
             return true;
         } catch (Exception e) {
             System.out.println("Error: " + e);
             return false;
         }
-        
+
     }
-   /**
-     *Se obtienen los datos del cajero indicado
-     * Prepara un objeto del tipo Cajero con el campo calve con la clave correcta
+
+    /**
+     * Se obtienen los datos del cajero indicado Prepara un objeto del tipo
+     * Cajero con el campo calve con la clave correcta
+     *
      * @param cajero
-     * @return 
+     * @return
      */
     public static Cajero get(Cajero cajero) {
         try {
@@ -142,24 +156,27 @@ public class Ctrl_Cajero {
                 p.setDireccion(d);
                 cajero.setPersona(p);
                 cajero.setClave(rs.getString("ClaveAcceso"));
+                cn.close();
                 return cajero;
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showInputDialog(null, "Error de conexion");
         }
         return null;
     }
-        private static List<Cajero> getAllCajeros() {
+
+    private static List<Cajero> getAllCajeros() {
         boolean respuesta = false;
-         List<Cajero>lista=new ArrayList<>();
+        List<Cajero> lista = new ArrayList<>();
         try {
             Connection cn = Conexion.conectar();
             CallableStatement consulta = cn.prepareCall("{CALL Consultar_All_Cajeros()}");
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
-           while (rs.next()) {
-                Cajero cajero=new Cajero();
+            while (rs.next()) {
+                Cajero cajero = new Cajero();
                 Persona p = new Persona();
                 Direccion d = new Direccion();
                 p.setID(rs.getInt("ID_cajero"));
@@ -179,59 +196,62 @@ public class Ctrl_Cajero {
                 p.setDireccion(d);
                 cajero.setPersona(p);
                 cajero.setClave(rs.getString("ClaveAcceso"));
-               lista.add(cajero);
+                lista.add(cajero);
+
             }
+            cn.close();
             return lista;
 
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showInputDialog(null, "Error de conexion");
         }
-       return lista;
+        return lista;
     }
+
     /**
-     *Genera un codigo randon combinando letras y numeros con una baja probabilidad de repeticion
+     * Genera un codigo randon combinando letras y numeros con una baja
+     * probabilidad de repeticion
      *
      * @param len
      * @return
      */
-    private static String generateRandomPassword(int len)
-    {
+    private static String generateRandomPassword(int len) {
         // Rango ASCII – alfanumérico (0-9, a-z, A-Z)
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
- 
+
         // cada iteración del bucle elige aleatoriamente un carácter del dado
         // rango ASCII y lo agrega a la instancia `StringBuilder`
- 
-        for (int i = 0; i < len; i++)
-        {
+        for (int i = 0; i < len; i++) {
             int randomIndex = random.nextInt(chars.length());
             sb.append(chars.charAt(randomIndex));
         }
- 
+
         return sb.toString();
     }
-     /**
-     *Recupera todos los cajeros
-     * @return 
+
+    /**
+     * Recupera todos los cajeros
+     *
+     * @return
      */
- public static DefaultTableModel getTabla(){
-     DefaultTableModel model=new DefaultTableModel();
-     List<Cajero>lista=getAllCajeros();
-     String fila[]=new String[5];
-     model.addColumn("Id");
-     model.addColumn("Nombre");
-     model.addColumn("Apelldios");
-     model.addColumn("Clave");
-     for(Cajero i:lista){
-         fila[0]=i.getID()+"";
-         fila[1]=i.getPersona().getNombre();
-         fila[2]=i.getPersona().getApelldios();
-         fila[3]=i.getClave();
-         model.addRow(fila);
-     }
-     return model;
- }
+    public static DefaultTableModel getTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        List<Cajero> lista = getAllCajeros();
+        String fila[] = new String[5];
+        model.addColumn("Id");
+        model.addColumn("Nombre");
+        model.addColumn("Apelldios");
+        model.addColumn("Clave");
+        for (Cajero i : lista) {
+            fila[0] = i.getID() + "";
+            fila[1] = i.getPersona().getNombre();
+            fila[2] = i.getPersona().getApelldios();
+            fila[3] = i.getClave();
+            model.addRow(fila);
+        }
+        return model;
+    }
 }

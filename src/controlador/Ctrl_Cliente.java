@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Direccion;
 import modelo.Persona;
+import modelo.RangoCliente;
 
 /**
  * Clase que controla la clase de cliente y todas la interacciones del modelo
@@ -41,9 +42,10 @@ public class Ctrl_Cliente {
             ResultSet rs = consulta.getResultSet();
             if (rs.next()) {
                 cliente.setID(Integer.parseInt(rs.getString(1)));
-
+                cn.close();
                 return relacionPersonaCliente(cliente);
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
             eliminar(cliente);
@@ -71,9 +73,10 @@ public class Ctrl_Cliente {
             System.out.println(cliente.getPersona().getID() + " " + cliente.getID());
 
             if (consulta.executeUpdate() > 0) {
-
+                cn.close();
                 return true;
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al crear relacion: " + e);
             eliminar(cliente);
@@ -137,9 +140,10 @@ public class Ctrl_Cliente {
                 cliente.setPuntos(rs.getInt("Puntos"));
                 cliente.setRango(rs.getInt("Rango"));
                 cliente.setTelefono(rs.getString("Telefono"));
+                cn.close();
                 return cliente;
             }
-
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showInputDialog(null, "Error de conexion");
@@ -163,6 +167,7 @@ public class Ctrl_Cliente {
             consulta.setString(2, cliente.getTelefono());
             consulta.setInt(3, cliente.getRango());
             consulta.execute();
+            cn.close();
             return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -187,13 +192,14 @@ public class Ctrl_Cliente {
             consulta.setInt(2, puntos);
             consulta.execute();
             ResultSet rs = consulta.getResultSet();
-             return true;
+            cn.close();
+            return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
             return false;
         }
-       
+
     }
 
     /**
@@ -233,6 +239,7 @@ public class Ctrl_Cliente {
                 cliente.setTelefono(rs.getString("Telefono"));
                 lista.add(cliente);
             }
+            cn.close();
             return lista;
 
         } catch (SQLException e) {
@@ -249,6 +256,7 @@ public class Ctrl_Cliente {
      */
     public static DefaultTableModel getTabla() {
         DefaultTableModel model = new DefaultTableModel();
+        List<RangoCliente> listarango =Ctrl_RangoCliente.getAllRangos();
         List<Cliente> lista = getAll();
         String fila[] = new String[5];
         model.addColumn("Id");
@@ -259,9 +267,11 @@ public class Ctrl_Cliente {
             fila[0] = i.getID() + "";
             fila[1] = i.getPersona().getNombre();
             fila[2] = i.getPersona().getApelldios();
-            fila[3] = Ctrl_RangoCliente.getRango(i.getRango()).getNombre();
+            fila[3] = Ctrl_RangoCliente.getRango(i.getRango(),listarango).getNombre();
             model.addRow(fila);
+
         }
+
         return model;
     }
 
@@ -326,7 +336,7 @@ public class Ctrl_Cliente {
                 fila[5] = c.getPersona().getFechaRegistro() + " ";
                 model.addRow(fila);
             }
-
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
@@ -336,23 +346,24 @@ public class Ctrl_Cliente {
     }
 
     /**
-     *Calcula el descuento dependiendo del rango indicado
+     * Calcula el descuento dependiendo del rango indicado
+     *
      * @param rango
      * @param total
      * @return
      */
-    public  static float descuentoPorRango(int rango,float total){
-        float descuento=0;
+    public static float descuentoPorRango(int rango, float total) {
+        float descuento = 0;
         switch (rango) {
-                 case 1:
-                descuento=.05f;
+            case 1:
+                descuento = .05f;
                 break;
-                 case 2:
-                descuento=.07f;
+            case 2:
+                descuento = .07f;
                 break;
             default:
-                
+
         }
-        return total*descuento;
+        return total * descuento;
     }
 }

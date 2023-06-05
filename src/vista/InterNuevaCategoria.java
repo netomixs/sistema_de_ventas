@@ -129,7 +129,6 @@ public class InterNuevaCategoria extends javax.swing.JInternalFrame {
 
         jButton2.setBackground(new java.awt.Color(0, 255, 51));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/img/add_mark_like_save_label_book_bookmark_icon_219290 (1).png"))); // NOI18N
         jButton2.setText("Agregar");
         jButton2.setMaximumSize(new java.awt.Dimension(142, 54));
         jButton2.setMinimumSize(new java.awt.Dimension(142, 54));
@@ -141,7 +140,7 @@ public class InterNuevaCategoria extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jButton2);
 
-        jButton_actualizar.setBackground(new java.awt.Color(0, 0, 255));
+        jButton_actualizar.setBackground(new java.awt.Color(51, 153, 255));
         jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_actualizar.setText("Actualizar");
         jButton_actualizar.setMaximumSize(new java.awt.Dimension(142, 54));

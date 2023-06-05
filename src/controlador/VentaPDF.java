@@ -26,7 +26,8 @@ import javax.swing.JTable;
 import vista.InterFacturacion;
 
 /**
- *Clase que genera pdf indicado
+ * Clase que genera pdf indicado
+ *
  * @author Jesus Ernesto De Leon Galleggos
  */
 public class VentaPDF {
@@ -38,9 +39,10 @@ public class VentaPDF {
 
     private static String fechaActual = "";
     private static String nombreArchivoPDFVenta = "";
-
+    private static String ruta = System.getProperty("user.dir") + "/";
+private static String rutaImg = System.getProperty("user.dir") + "/LogoSalesWear.png";
     private void generarFacturaPDF() {
-      
+
         try {
 
             //cargar la fecha actual
@@ -57,14 +59,14 @@ public class VentaPDF {
             nombreArchivoPDFVenta = "Venta_" + nombreCliente + "_" + fechaNueva + ".pdf";
 
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
+            File file = new File(ruta + nombreArchivoPDFVenta);
             archivo = new FileOutputStream(file);
 
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
 
-            Image img = Image.getInstance("src/img/ventas.png");
+            Image img = Image.getInstance(rutaImg);
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
             fecha.add(Chunk.NEWLINE); //agregar nueva linea
@@ -211,7 +213,8 @@ public class VentaPDF {
     }
 
     /**
-     *Genera un pdf y lo muestra en pantalla de las ventas
+     * Genera un pdf y lo muestra en pantalla de las ventas
+     *
      * @param inicio
      * @param fin
      */
@@ -229,16 +232,16 @@ public class VentaPDF {
                 }
             }
 
-            nombreArchivoPDFVenta = "Reporte_Clintes" + "_" + fechaNueva + ".pdf";
+            nombreArchivoPDFVenta = "Reporte_Ventas" + "_" + fechaNueva + ".pdf";
 
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
+            File file = new File(ruta + nombreArchivoPDFVenta);
             archivo = new FileOutputStream(file);
 
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance("src/Recursos/img/LogoSalesWear.png");//Se agarra una imagen
+            Image img = Image.getInstance(rutaImg);//Se agarra una imagen
             img.scaleAbsolute(100, 100);//escala la imagen
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
@@ -337,7 +340,8 @@ public class VentaPDF {
     }
 
     /**
-     *Genera un pdf y lo muestra en pantalla de los clientes
+     * Genera un pdf y lo muestra en pantalla de los clientes
+     *
      * @param inicio
      * @param fin
      */
@@ -355,16 +359,16 @@ public class VentaPDF {
                 }
             }
 
-            nombreArchivoPDFVenta = "Reporte" + nombreCliente + "_" + fechaNueva + ".pdf";
+            nombreArchivoPDFVenta = "Reporte_Clientes"   + "_" + fechaNueva + ".pdf";
 
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
+            File file = new File(ruta + nombreArchivoPDFVenta);
             archivo = new FileOutputStream(file);
 
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance("src/Recursos/img/LogoSalesWear.png");//Se agarra una imagen
+            Image img = Image.getInstance(rutaImg);//Se agarra una imagen
             img.scaleAbsolute(100, 100);//escala la imagen
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
@@ -475,7 +479,8 @@ public class VentaPDF {
     }
 
     /**
-     *Genera un pdf y lo muestra en pantalla de los prodcutos mas vendidos
+     * Genera un pdf y lo muestra en pantalla de los prodcutos mas vendidos
+     *
      * @param inicio
      * @param fin
      */
@@ -496,13 +501,13 @@ public class VentaPDF {
             nombreArchivoPDFVenta = "Reporte Porducto mas vendidos" + "_" + fechaNueva + ".pdf";
 
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
+            File file = new File(ruta + nombreArchivoPDFVenta);
             archivo = new FileOutputStream(file);
 
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance("src/Recursos/img/LogoSalesWear.png");//Se agarra una imagen
+            Image img = Image.getInstance(rutaImg);//Se agarra una imagen
             img.scaleAbsolute(100, 100);//escala la imagen
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
@@ -615,16 +620,18 @@ public class VentaPDF {
     }
 
     /**
-     *Metodo universal para generar un Pdf de la empresa
+     * Metodo universal para generar un Pdf de la empresa
+     *
      * @param inicio:Fecha de inincio del reporte
      * @param fin:Fecha de final del reporte
      * @param tabla:Tabla de los datos a mostrar
      * @param name:Nombre del archivo
      * @param anchoColumnas:Arreglo de los anchos de columna
-     * @param leyenda:Texto mostrado inmediato despues d3 finalizar la tabla mostrada el el lado deerecho
+     * @param leyenda:Texto mostrado inmediato despues d3 finalizar la tabla
+     * mostrada el el lado deerecho
      * @param encabezado:Texto membrete
      */
-    public static void generarPDf(Date inicio, Date fin, JTable tabla, String name, float[] anchoColumnas, String leyenda,String encabezado) {
+    public static void generarPDf(Date inicio, Date fin, JTable tabla, String name, float[] anchoColumnas, String leyenda, String encabezado) {
         try {
 
             //cargar la fecha actual
@@ -639,13 +646,13 @@ public class VentaPDF {
             }
             nombreArchivoPDFVenta = name + "_" + fechaNueva + ".pdf";
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
+            File file = new File(ruta + nombreArchivoPDFVenta);
             archivo = new FileOutputStream(file);
             ///Encabezado
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance("src/Recursos/img/LogoSalesWear.png");//Se agarra una imagen
+            Image img = Image.getInstance(rutaImg);//Se agarra una imagen
             img.scaleAbsolute(100, 100);//escala la imagen
 
             Paragraph fecha = new Paragraph();

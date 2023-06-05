@@ -32,6 +32,7 @@ public class Ctrl_RangoCliente {
             consulta.setString(1, nombre);
             consulta.setString(2, color);
             consulta.execute();
+              cn.close();
                return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -53,6 +54,7 @@ public class Ctrl_RangoCliente {
             consulta.setString(2, rango.getNombre());
             consulta.setString(2, rango.getColor());
             consulta.execute();
+              cn.close();
                return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -72,6 +74,7 @@ public class Ctrl_RangoCliente {
             CallableStatement consulta = cn.prepareCall("{CALL Eliminar_Rango(?)}");
             consulta.setInt(1, id);
             consulta.execute();
+              cn.close();
                return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -98,6 +101,7 @@ public class Ctrl_RangoCliente {
                 rango.setColor(rs.getString("Color"));
                 lista.add(rango);
             }
+              cn.close();
             return lista;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -125,6 +129,7 @@ public class Ctrl_RangoCliente {
                 rango.setColor(rs.getString("Color"));
               
             }
+              cn.close();
             return rango;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -132,4 +137,12 @@ public class Ctrl_RangoCliente {
         }
         return rango;
     }
+      public static RangoCliente getRango(int id,List<RangoCliente> lista){
+          for (RangoCliente rangoCliente : lista) {
+              if(rangoCliente.getId()==id){
+                  return rangoCliente;
+              }
+          }
+          return new RangoCliente();
+      }
 }

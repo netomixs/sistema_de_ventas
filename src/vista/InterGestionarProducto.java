@@ -193,6 +193,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame implement
         jLabel7.setText("Categoria:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 90, -1));
 
+        txt_cantidad.setEditable(false);
         txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_cantidad.setEnabled(false);
         jPanel3.add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
@@ -219,6 +220,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame implement
         jLabel8.setText("Codigo de barras:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 140, -1));
 
+        txt_Barra.setEditable(false);
         txt_Barra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_Barra.setEnabled(false);
         jPanel3.add(txt_Barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 170, -1));

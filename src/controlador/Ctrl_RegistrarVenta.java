@@ -22,10 +22,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +42,8 @@ import modelo.ProductosVendidos;
  */
 public class Ctrl_RegistrarVenta {
 
+    private static String ruta = System.getProperty("user.dir") + "/";
+    private static String rutaImg = System.getProperty("user.dir") + "/LogoSalesWear.png";
     static String nombre = "Tienda de ropa";
     static String info = "Calle: Calle de la Rosa. Numero: 123. Zone centro. El Mante Tamaulipas";
 
@@ -167,15 +171,24 @@ public class Ctrl_RegistrarVenta {
         LocalTime hora = LocalTime.now();
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         String horaActual = hora.format(formatterHora);
-
+ //cargar la fecha actual
+            Date date = new Date();
+            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            //cambiar el formato de la fecha de / a _
+            String fechaNueva = "";
+            for (int i = 0; i < fechaActual.length(); i++) {
+                if (fechaActual.charAt(i) == '/') {
+                    fechaNueva = fechaActual.replace("/", "_");
+                }
+            }
         // Se crea un objeto File con la ruta y nombre del archivo PDF que se va a generar
-        File file = new File("src/pdf/venta" + id + ".pdf");
-        try ( FileOutputStream archivo = new FileOutputStream(file) // Se crea un objeto FileOutputStream con el archivo anteriormente creado para escribir en él
+        File file = new File(ruta+"Venta_ " +id +"_"+ fechaNueva+".pdf");
+        try (FileOutputStream archivo = new FileOutputStream(file) // Se crea un objeto FileOutputStream con el archivo anteriormente creado para escribir en él
                 ) {
             Document doc = new Document();// Se crea un objeto Document que representa el documento PDF
             PdfWriter.getInstance(doc, archivo);// Se crea un objeto PdfWriter con el Document y el FileOutputStream para escribir en el documento PDF
             doc.open();//Se abre el documento para empezar a escribir en el
-            Image img = Image.getInstance("src/Recursos/img/LogoSalesWear.png");//Se agarra una imagen
+            Image img = Image.getInstance(rutaImg);//Se agarra una imagen
             img.scaleAbsolute(100, 100);//escala la imagen
             img.setAlignment(Element.ALIGN_CENTER);//alinea la imagen al centro
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);//Se establece una fuente en negrita
@@ -223,7 +236,7 @@ public class Ctrl_RegistrarVenta {
             for (int i = 0; i < model.getRowCount(); i++) {
                 String descripcion = model.getValueAt(i, 1).toString();
                 String cantidad = model.getValueAt(i, 2).toString();
-                 String precioUnitario = model.getValueAt(i, 3).toString();
+                String precioUnitario = model.getValueAt(i, 3).toString();
                 String precio = "$" + model.getValueAt(i, 5).toString();
                 tablaProd.addCell(cantidad);
                 tablaProd.addCell(descripcion);

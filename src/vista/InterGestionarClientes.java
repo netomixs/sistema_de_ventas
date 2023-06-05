@@ -228,7 +228,7 @@ public class InterGestionarClientes extends javax.swing.JInternalFrame {
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
 
         if (indexSelecionado >= 0) {
-            String clave = jTable_clientes.getModel().getValueAt(indexSelecionado, 0).toString();
+            String clave = jTable_clientes.getValueAt(indexSelecionado, 0).toString();
             System.out.println(clave);
             InterEditarCliente editCliente = new InterEditarCliente(Integer.parseInt(clave));
             desk.add(editCliente);

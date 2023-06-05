@@ -38,9 +38,11 @@ public class Ctrl_Admin {
             while (rs.next()) {
                 respuesta = true;
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error ocuriro algo: " + e);
         }
+
         return respuesta;
     }
 
@@ -67,8 +69,10 @@ public class Ctrl_Admin {
             ResultSet rs = consulta.getResultSet();
             if (rs.next()) {
                 admi.setID(Integer.parseInt(rs.getString(1)));
+                cn.close();
                 return relacionPersonaAdmin(admi);
             }
+            cn.close();
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) { // Código de error para registro duplicado
                 JOptionPane.showMessageDialog(null, "El usuario con ese apodo ya existe ", "Usuario repetido", JOptionPane.ERROR_MESSAGE);
@@ -100,9 +104,10 @@ public class Ctrl_Admin {
             System.out.println(admi.getPersona().getID() + " " + admi.getID());
 
             if (consulta.executeUpdate() > 0) {
-
+                cn.close();
                 return true;
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al crear relacion: " + e);
             eliminar(admi);
@@ -116,7 +121,6 @@ public class Ctrl_Admin {
      *
      * @param administrador
      */
-  
     public static void eliminar(Administrador administrador) {
         Connection cn = Conexion.conectar();
         try {
@@ -153,6 +157,7 @@ public class Ctrl_Admin {
             consulta.execute();
 
             ResultSet rs = consulta.getResultSet();
+            cn.close();
             return true;
         } catch (SQLException e) {
             System.out.println("Error al crear usuario: " + e);
@@ -161,6 +166,7 @@ public class Ctrl_Admin {
             } else {
                 System.out.println("Error al guardar usuario: " + e.getMessage());
             }
+
             return false;
         }
 
@@ -200,10 +206,10 @@ public class Ctrl_Admin {
                 p.setDireccion(d);
                 administrador.setPersona(p);
                 administrador.setUsuario(rs.getString("Usuario"));
-
+                cn.close();
                 return administrador;
             }
-
+   cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             JOptionPane.showInputDialog(null, "Error de conexion");
@@ -212,9 +218,9 @@ public class Ctrl_Admin {
     }
 
     /**
-     *Eliminar al administrador indicado por ID
-     * Se debe de proporcionar ID persona y direccion en el objeto
-     * 
+     * Eliminar al administrador indicado por ID Se debe de proporcionar ID
+     * persona y direccion en el objeto
+     *
      * @param admin
      */
     public static void eliminarAdministrador(Administrador admin) {
